@@ -1,0 +1,42 @@
+FROM python:3.12-slim@sha256:d97792894a6a4162cae14da44542a83c75e56c77a27b92d58f3f83b7bc961292
+
+LABEL org.opencontainers.image.title="Deep Research Studio API" \
+      org.opencontainers.image.version="1.0.0" \
+      org.opencontainers.image.licenses="PolyForm-Noncommercial-1.0.0"
+
+WORKDIR /app
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    DEEPRESEARCH_API_HOST=0.0.0.0 \
+    DEEPRESEARCH_API_PORT=8787 \
+    DEEPRESEARCH_DB_PATH=/data/baseline.sqlite3 \
+    DEEPRESEARCH_JOB_BACKEND=rq \
+    DEEPRESEARCH_REDIS_URL=redis://redis:6379/0
+
+RUN set -eux; \
+    apt-get -o Acquire::Retries=5 update; \
+    for attempt in 1 2 3 4 5; do \
+        apt-get -o Acquire::Retries=5 install -y --no-install-recommends --download-only ca-certificates build-essential libsqlcipher-dev && break; \
+        if [ "$attempt" = "5" ]; then exit 1; fi; \
+        sleep 5; \
+    done; \
+    apt-get install -y --no-install-recommends --no-download ca-certificates build-essential libsqlcipher-dev; \
+    rm -rf /var/lib/apt/lists/*
+
+COPY docker/requirements-api.txt .
+RUN pip install --no-cache-dir -r requirements-api.txt
+
+COPY deepresearch_core ./deepresearch_core
+COPY scripts/release_doctor.py ./scripts/release_doctor.py
+COPY run_api.py .
+COPY LICENSE NOTICE THIRD_PARTY_NOTICES.md /usr/share/licenses/deep-research-studio/
+
+RUN mkdir -p /data
+
+EXPOSE 8787
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8787/api/v1/health', timeout=3)"
+
+CMD ["python", "run_api.py"]

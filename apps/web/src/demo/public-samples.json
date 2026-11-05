@@ -1,0 +1,961 @@
+[
+  {
+    "mode": "fast",
+    "query": "Which search query operators does SQLite FTS5 support? Cite the documentation.",
+    "status": "completed",
+    "result": {
+      "answer": {
+        "text": "## Executive Summary\n\nSQLite FTS5 supports the **MATCH operator** in the WHERE clause of SELECT statements for full-text search queries [c2]. The query language includes implicit AND between terms and explicit boolean operators in uppercase, such as AND, OR, and NOT [c5]. It also supports **prefix search** as a query operator [c4].\n\n## Evidence\n\n- FTS5 queries use the MATCH operator to perform full-text queries on virtual tables [c2].  \n- Boolean operators must be uppercase and include AND, OR, and NOT for explicit control of search logic [c5].  \n- Queries can perform prefix searches to match terms starting with a specified prefix [c4].",
+        "citations": [
+          {
+            "id": "c1",
+            "document_id": "sample_doc_1",
+            "url": "",
+            "title": "Deep report: Research the documented indexing, tokenization and ranking features of SQLite...",
+            "snippet": "for non-space-delimited Asian languages. SQLite FTS5 incorporates built-in ranking algorithms, including BM25, to provide relevant and ranked search results. However, its default t",
+            "score": 0.016393,
+            "origin": "local",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c2",
+            "document_id": "sample_doc_2",
+            "url": "https://www.sqlitetutorial.net/sqlite-full-text-search/",
+            "title": "Getting started with SQLite Full-text Search By Examples",
+            "snippet": "You can execute a full-text query against an FTS5 table using one of these three ways. First, use a <strong>MATCH operator</strong> in the WHERE clause of the SELECT statement.",
+            "score": 0.016129,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c3",
+            "document_id": "sample_doc_3",
+            "url": "",
+            "title": "Council report: Assess the documented benefits and limitations of SQLite FTS5 for a local res...",
+            "snippet": "- Member A focuses more on FTS5’s built-in ranking and extensibility without emphasizing semantic or vector-based limitations [c1]. - **Reason for difference:** Members emphasize d",
+            "score": 0.015873,
+            "origin": "local",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c4",
+            "document_id": "sample_doc_4",
+            "url": "https://coddy.tech/docs/sqlite/full-text-search",
+            "title": "SQLite Full-Text Search: FTS5 Virtual Tables and MATCH",
+            "snippet": "A practical guide to SQLite full-text search with FTS5: create virtual tables, query with MATCH, rank results with bm25(), use <strong>prefix search and snippet/highlight</strong>.",
+            "score": 0.015625,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c5",
+            "document_id": "sample_doc_5",
+            "url": "https://mako.ai/guides/sqlite/full-text-search",
+            "title": "Full-Text Search in SQLite with FTS5 — Mako",
+            "snippet": "FTS5&#x27;s query language covers most of what people expect from a search box: -- AND is implicit between terms SELECT * FROM articles_fts WHERE articles_fts MATCH &#x27;index sea",
+            "score": 0.015385,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c6",
+            "document_id": "sample_doc_6",
+            "url": "",
+            "title": "Member 1",
+            "snippet": "ranking layer.[c1] For local interactive workloads, one reported implementation found FTS5 queries returning in under 5 milliseconds on a standard laptop for databases with hundred",
+            "score": 0.015152,
+            "origin": "local",
+            "grounding_eligible": true,
+            "source_status": "active"
+          }
+        ],
+        "claim_map": {
+          "SQLite FTS5 supports the **MATCH operator** in the WHERE clause of SELECT statements for full-text search queries [c2].": [
+            "c2"
+          ],
+          "- FTS5 queries use the MATCH operator to perform full-text queries on virtual tables [c2].": [
+            "c2"
+          ]
+        },
+        "coverage": 0.3333,
+        "summary": "SQLite FTS5 supports the **MATCH operator** in the WHERE clause of SELECT statements for full-text search queries [c2]. The query language includes implicit AND between terms and explicit boolean operators in uppercase, such as AND, OR, and NOT [c5]. It also supports **prefix search** as a query operator [c4].",
+        "key_takeaways": [],
+        "limitations": "",
+        "confidence_label": "uncertain",
+        "conflicts": []
+      },
+      "verification": {
+        "status": "completed",
+        "started_at": 1793726861.2727685,
+        "completed_at": 1793726866.2932577,
+        "coverage": 0.3333333333333333
+      },
+      "confidence_warning": {
+        "reasons": [
+          "coverage_below_threshold"
+        ],
+        "acknowledged": true,
+        "acknowledged_at": 1793726994.7541184
+      },
+      "sources": [
+        {
+          "id": "c1",
+          "document_id": "sample_doc_1",
+          "url": "",
+          "title": "Deep report: Research the documented indexing, tokenization and ranking features of SQLite...",
+          "snippet": "for non-space-delimited Asian languages. SQLite FTS5 incorporates built-in ranking algorithms, including BM25, to provide relevant and ranked search results. However, its default t",
+          "score": 0.016393,
+          "origin": "local",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c2",
+          "document_id": "sample_doc_2",
+          "url": "https://www.sqlitetutorial.net/sqlite-full-text-search/",
+          "title": "Getting started with SQLite Full-text Search By Examples",
+          "snippet": "You can execute a full-text query against an FTS5 table using one of these three ways. First, use a <strong>MATCH operator</strong> in the WHERE clause of the SELECT statement.",
+          "score": 0.016129,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c3",
+          "document_id": "sample_doc_3",
+          "url": "",
+          "title": "Council report: Assess the documented benefits and limitations of SQLite FTS5 for a local res...",
+          "snippet": "- Member A focuses more on FTS5’s built-in ranking and extensibility without emphasizing semantic or vector-based limitations [c1]. - **Reason for difference:** Members emphasize d",
+          "score": 0.015873,
+          "origin": "local",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c4",
+          "document_id": "sample_doc_4",
+          "url": "https://coddy.tech/docs/sqlite/full-text-search",
+          "title": "SQLite Full-Text Search: FTS5 Virtual Tables and MATCH",
+          "snippet": "A practical guide to SQLite full-text search with FTS5: create virtual tables, query with MATCH, rank results with bm25(), use <strong>prefix search and snippet/highlight</strong>.",
+          "score": 0.015625,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c5",
+          "document_id": "sample_doc_5",
+          "url": "https://mako.ai/guides/sqlite/full-text-search",
+          "title": "Full-Text Search in SQLite with FTS5 — Mako",
+          "snippet": "FTS5&#x27;s query language covers most of what people expect from a search box: -- AND is implicit between terms SELECT * FROM articles_fts WHERE articles_fts MATCH &#x27;index sea",
+          "score": 0.015385,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c6",
+          "document_id": "sample_doc_6",
+          "url": "",
+          "title": "Member 1",
+          "snippet": "ranking layer.[c1] For local interactive workloads, one reported implementation found FTS5 queries returning in under 5 milliseconds on a standard laptop for databases with hundred",
+          "score": 0.015152,
+          "origin": "local",
+          "grounding_eligible": true,
+          "source_status": "active"
+        }
+      ]
+    }
+  },
+  {
+    "mode": "multiple",
+    "query": "Compare SQLite FTS5 prefix searches, phrase searches and NEAR queries using documented evidence.",
+    "status": "completed",
+    "result": {
+      "answer": {
+        "text": "## Executive Summary\nSQLite FTS5 provides three distinct query capabilities: prefix searches, phrase searches, and NEAR queries, each optimized for different text search needs. Prefix searches allow fast token prefix matching but require additional indexing overhead. Phrase searches leverage the index for exact token sequence matching with ranking support. NEAR queries enable proximity-based matching of tokens within a defined distance, allowing flexible order and span constraints, but with more complex processing. These features collectively support efficient full-text querying tailored to local application needs with ranking, snippets, and highlighting [c1][c5][c8].\n\n## Key Takeaways\n- Prefix searches in SQLite FTS5 use a single indexed lookup for prefix tokens but are slower than exact token matches due to expanded index scans [c5].  \n- Phrase searches perform fast queries for an exact token sequence allowing natural-language-like querying with relevance ranking [c1].  \n- NEAR queries enable token proximity searches, matching terms near each other within a defined distance, supporting unordered matching and flexible query patterns [c7].  \n- Ranking and highlighting are integrated with all FTS5 query types to improve result relevance and presentation [c1][c8].  \n- FTS5’s design as a virtual table module enables these queries to be performed efficiently within a local application context [c1][c8].  \n\n## Prefix Searches in SQLite FTS5  \nSQLite FTS5 maintains one index recording the location of token instances within the document set, making exact token queries very fast with a single lookup. Prefix searches, however, query token prefixes, which expands the index scan beyond a single token lookup, resulting in slower performance relative to exact matches. This tradeoff exists because the prefix must be matched against all tokens sharing that prefix rather than one exact token [c5]. Despite this limitation, prefix queries enable searching for token starts, useful for autocomplete or partial word matches within local datasets [c1].\n\n## Phrase Searches in SQLite FTS5  \nPhrase searches in FTS5 query a sequence of tokens in exact order, allowing applications to find exact phrases inside text documents. Phrase queries leverage the same underlying token location index, so they efficiently locate documents where the phrase appears. They also integrate with FTS5’s built-in ranking features that score results based on relevance signals like term frequency and document length normalization, facilitating prioritized result displays [c1][c2][c4]. This makes phrase search suitable when precise language matching is required.\n\n## NEAR Queries in SQLite FTS5  \nNEAR queries support finding tokens located close to each other within a specified distance threshold, allowing more flexible searches than exact phrase queries. They can match terms in any order, within a defined proximity, such as \"term1 NEAR term2,\" enabling user queries tolerant to token order variation. However, NEAR queries require more complex query processing due to proximity and ordering logic. The FTS5 forum confirms that while token order constraints in NEAR queries are possible, customizing exact query orders (such as after/not before constraints) is restricted [c7]. This proximity search is valuable for research and exploratory applications that need semantic rather than strictly lexical matching.\n\n## Integration with Ranking, Snippets, and Highlighting  \nAll three query types—prefix, phrase, and NEAR—benefit from FTS5’s ranking algorithm, which incorporates term frequency, inverse document frequency, and document length normalization to score and order results by relevance [c2][c4]. Snippets and highlighting features are also supported uniformly, facilitating richer user interface experiences in research or local applications by providing immediate contextual relevance and ease of document inspection [c1][c3][c8].\n\n## Conclusion  \nSQLite FTS5’s prefix searches provide flexible but slower partial token matching, phrase searches deliver efficient exact token sequence matching with relevance ranking, and NEAR queries enable proximity-based and order-flexible token matching for more semantic search needs. Integrated ranking, snippets, and highlighting enhance all query types for local application scenarios. These features make FTS5 a versatile and efficient full-text search tool for diverse text querying requirements [c1][c5][c7][c8].",
+        "citations": [
+          {
+            "id": "c1",
+            "document_id": "sample_doc_1",
+            "url": "",
+            "title": "Council report: Assess the documented benefits and limitations of SQLite FTS5 for a local res...",
+            "snippet": "## Agreement - SQLite FTS5 is a built-in full-text search extension implemented as a virtual table module offering fast `MATCH` queries with ranking, snippets, and highlighting, en",
+            "score": 0.016393,
+            "origin": "local",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c2",
+            "document_id": "sample_doc_2",
+            "url": "",
+            "title": "Deep report: Research the documented indexing, tokenization and ranking features of SQLite...",
+            "snippet": "frequency, inverse document frequency, and document length normalization to score results. This relevance scoring allows applications to display more pertinent results first. Addit",
+            "score": 0.016129,
+            "origin": "local",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c3",
+            "document_id": "sample_doc_3",
+            "url": "",
+            "title": "Member 1",
+            "snippet": "additional scoring signals, which gives a research application room to tune search behavior for domain-specific corpora.[c1] Its support for snippets and highlighting further reduc",
+            "score": 0.015873,
+            "origin": "local",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c4",
+            "document_id": "sample_doc_4",
+            "url": "https://medium.com/@johnidouglasmarangon/full-text-search-in-sqlite-a-practical-guide-80a69c3f42a4",
+            "title": "Full-Text Search in SQLite: A Practical Guide | by Johni Douglas Marangon | Medium",
+            "snippet": "SELECT *, rank FROM articles WHERE articles MATCH &#x27;SQLite database&#x27; ORDER BY rank;The rank column is an FTS5 feature showing how well each row matches the query · This me",
+            "score": 0.015625,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c5",
+            "document_id": "sample_doc_5",
+            "url": "https://www.sqlite.org/fts5.html",
+            "title": "SQLite FTS5 Extension",
+            "snippet": "By default, FTS5 maintains a single index recording the location of each token instance within the document set. This means that querying for complete tokens is fast, as it require",
+            "score": 0.015385,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c6",
+            "document_id": "sample_doc_6",
+            "url": "https://www.geeksforgeeks.org/sqlite/sqlite-full-text-search/",
+            "title": "SQLite Full-text Search - GeeksforGeeks",
+            "snippet": "While core SQLite features are small in number, SQLite provides a vast number of extensions that extend its features to fulfill the requirement. Full-text search extensions or FTS5",
+            "score": 0.015152,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c7",
+            "document_id": "sample_doc_7",
+            "url": "https://sqlite.org/forum/info/a4c2d9953257dbf1",
+            "title": "SQLite User Forum: FTS: particular order of NEAR queries possible? (after and not before)",
+            "snippet": "I assume that for your queries you don&#x27;t need to use fts5 syntax queries and use fts5vocab module companion.",
+            "score": 0.014925,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c8",
+            "document_id": "sample_doc_8",
+            "url": "",
+            "title": "Member 2",
+            "snippet": "## Benefits of SQLite FTS5 for a Local Research Application FTS5 is SQLite's full-text search extension, implemented as a virtual table module that indexes text to support fast `MA",
+            "score": 0.014706,
+            "origin": "local",
+            "grounding_eligible": true,
+            "source_status": "active"
+          }
+        ],
+        "claim_map": {
+          "- Prefix searches in SQLite FTS5 use a single indexed lookup for prefix tokens but are slower than exact token matches due to expanded index scans [c5].": [
+            "c5"
+          ],
+          "- Phrase searches perform fast queries for an exact token sequence allowing natural-language-like querying with relevance ranking [c1].": [
+            "c1"
+          ],
+          "- Ranking and highlighting are integrated with all FTS5 query types to improve result relevance and presentation [c1][c8].": [
+            "c1",
+            "c8"
+          ],
+          "SQLite FTS5 maintains one index recording the location of token instances within the document set, making exact token queries very fast with a single lookup.": [
+            "c5",
+            "c1",
+            "c8"
+          ],
+          "This tradeoff exists because the prefix must be matched against all tokens sharing that prefix rather than one exact token [c5].": [
+            "c5"
+          ],
+          "Phrase searches in FTS5 query a sequence of tokens in exact order, allowing applications to find exact phrases inside text documents.": [
+            "c4"
+          ],
+          "Phrase queries leverage the same underlying token location index, so they efficiently locate documents where the phrase appears.": [
+            "c5"
+          ],
+          "This proximity search is valuable for research and exploratory applications that need semantic rather than strictly lexical matching.": [
+            "c3"
+          ],
+          "Integrated ranking, snippets, and highlighting enhance all query types for local application scenarios.": [
+            "c8",
+            "c1"
+          ]
+        },
+        "coverage": 0.2571,
+        "summary": "SQLite FTS5 provides three distinct query capabilities: prefix searches, phrase searches, and NEAR queries, each optimized for different text search needs. Prefix searches allow fast token prefix matching but require additional indexing overhead. Phrase searches leverage the index for exact token sequence matching with ranking support. NEAR queries enable proximity-based matching of tokens within a defined distance, allowing flexible order and span constraints, but with more complex processing. These features collectively support efficient full-text querying tailored to local application needs with ranking, snippets, and highlighting [c1][c5][c8].",
+        "key_takeaways": [
+          "Prefix searches in SQLite FTS5 use a single indexed lookup for prefix tokens but are slower than exact token matches due to expanded index scans [c5].",
+          "Phrase searches perform fast queries for an exact token sequence allowing natural-language-like querying with relevance ranking [c1].",
+          "NEAR queries enable token proximity searches, matching terms near each other within a defined distance, supporting unordered matching and flexible query patterns [c7].",
+          "Ranking and highlighting are integrated with all FTS5 query types to improve result relevance and presentation [c1][c8].",
+          "FTS5’s design as a virtual table module enables these queries to be performed efficiently within a local application context [c1][c8]."
+        ],
+        "limitations": "- The detailed performance comparison metrics between the query types are not provided in the sources [c1][c5].  \n- The scope of NEAR query ordering constraints is limited by implementation as noted but not extensively documented [c7].  \n- Practical usage guidance for tuning prefix query performance versus index size tradeoffs is not covered [c5].",
+        "confidence_label": "uncertain",
+        "conflicts": []
+      },
+      "verification": {
+        "status": "completed",
+        "started_at": 1793726874.6257265,
+        "completed_at": 1793726884.6529026,
+        "coverage": 0.2571428571428571
+      },
+      "confidence_warning": {
+        "reasons": [
+          "coverage_below_threshold"
+        ],
+        "acknowledged": false
+      },
+      "sources": [
+        {
+          "id": "c1",
+          "document_id": "sample_doc_1",
+          "url": "",
+          "title": "Council report: Assess the documented benefits and limitations of SQLite FTS5 for a local res...",
+          "snippet": "## Agreement - SQLite FTS5 is a built-in full-text search extension implemented as a virtual table module offering fast `MATCH` queries with ranking, snippets, and highlighting, en",
+          "score": 0.016393,
+          "origin": "local",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c2",
+          "document_id": "sample_doc_2",
+          "url": "",
+          "title": "Deep report: Research the documented indexing, tokenization and ranking features of SQLite...",
+          "snippet": "frequency, inverse document frequency, and document length normalization to score results. This relevance scoring allows applications to display more pertinent results first. Addit",
+          "score": 0.016129,
+          "origin": "local",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c3",
+          "document_id": "sample_doc_3",
+          "url": "",
+          "title": "Member 1",
+          "snippet": "additional scoring signals, which gives a research application room to tune search behavior for domain-specific corpora.[c1] Its support for snippets and highlighting further reduc",
+          "score": 0.015873,
+          "origin": "local",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c4",
+          "document_id": "sample_doc_4",
+          "url": "https://medium.com/@johnidouglasmarangon/full-text-search-in-sqlite-a-practical-guide-80a69c3f42a4",
+          "title": "Full-Text Search in SQLite: A Practical Guide | by Johni Douglas Marangon | Medium",
+          "snippet": "SELECT *, rank FROM articles WHERE articles MATCH &#x27;SQLite database&#x27; ORDER BY rank;The rank column is an FTS5 feature showing how well each row matches the query · This me",
+          "score": 0.015625,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c5",
+          "document_id": "sample_doc_5",
+          "url": "https://www.sqlite.org/fts5.html",
+          "title": "SQLite FTS5 Extension",
+          "snippet": "By default, FTS5 maintains a single index recording the location of each token instance within the document set. This means that querying for complete tokens is fast, as it require",
+          "score": 0.015385,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c6",
+          "document_id": "sample_doc_6",
+          "url": "https://www.geeksforgeeks.org/sqlite/sqlite-full-text-search/",
+          "title": "SQLite Full-text Search - GeeksforGeeks",
+          "snippet": "While core SQLite features are small in number, SQLite provides a vast number of extensions that extend its features to fulfill the requirement. Full-text search extensions or FTS5",
+          "score": 0.015152,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c7",
+          "document_id": "sample_doc_7",
+          "url": "https://sqlite.org/forum/info/a4c2d9953257dbf1",
+          "title": "SQLite User Forum: FTS: particular order of NEAR queries possible? (after and not before)",
+          "snippet": "I assume that for your queries you don&#x27;t need to use fts5 syntax queries and use fts5vocab module companion.",
+          "score": 0.014925,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c8",
+          "document_id": "sample_doc_8",
+          "url": "",
+          "title": "Member 2",
+          "snippet": "## Benefits of SQLite FTS5 for a Local Research Application FTS5 is SQLite's full-text search extension, implemented as a virtual table module that indexes text to support fast `MA",
+          "score": 0.014706,
+          "origin": "local",
+          "grounding_eligible": true,
+          "source_status": "active"
+        }
+      ]
+    }
+  },
+  {
+    "mode": "deep",
+    "query": "Research the documented indexing, tokenization and ranking features of SQLite FTS5 and their limitations, with sources.",
+    "status": "completed",
+    "result": {
+      "answer": {
+        "text": "## Executive Summary\n\nSQLite FTS5 is a powerful full-text search extension enabling efficient text indexing and complex search capabilities through virtual tables. It supports multiple built-in tokenizers and allows for custom tokenizers to handle language-specific tokenization challenges, particularly for non-space-delimited Asian languages. SQLite FTS5 incorporates built-in ranking algorithms, including BM25, to provide relevant and ranked search results. However, its default tokenizers have limitations with some languages, necessitating customization via plugins for robust multilingual support [c1][c4][c5][c6][c7][c9].\n\n## Key Takeaways\n\n- SQLite FTS5 uses tokenizers to parse input text into searchable tokens; the default tokenizers include unicode61, ascii, porter, and trigram [c4][c9].\n- Custom tokenizers can be implemented through the FTS5 Custom Plugin API, which requires defining constructor, destructor, and tokenizing functions, facilitating support for complex languages like Chinese and Japanese [c1][c5].\n- FTS5 ranking functionality includes built-in algorithms such as BM25, which rank results based on term frequency and document relevance, enhancing query result importance [c2][c7][c8].\n- FTS5 tables are virtual tables that index textual content and can be queried using standard SQL; they disallow the addition of types or constraints in their CREATE VIRTUAL TABLE statements [c4].\n- The primary limitation in multilingual contexts is that the default tokenizers often inadequately handle languages where token boundaries are unclear and require non-space-based segmentation, making custom tokenizer implementation necessary for effective indexing and search [c1].\n\n## Indexing Mechanisms in FTS5\n\nSQLite FTS5 uses virtual tables to index text by breaking down input strings into discrete tokens. The indexing mechanism revolves around the tokenizer, which extracts zero or more tokens from each string in documents. These tokens form the searchable terms within the FTS5 table, enabling efficient text lookups. FTS5 tables are populated with INSERT, UPDATE, or DELETE statements similar to regular tables, but with a specialized storage layout optimized for full-text search [c4][c10].\n\n## Tokenization Methods and Customization Options\n\nTokenization in SQLite FTS5 is the process of parsing strings into tokens or terms, which are the atomic searchable units. Out-of-the-box, FTS5 provides several built-in tokenizers:\n\n- **unicode61**: Handles Unicode characters with basic tokenization rules.\n- **ascii**: Assumes ASCII input and tokenizes accordingly.\n- **porter**: Performs Porter stemming for English language word forms.\n- **trigram**: Produces 3-character grams useful for partial and fuzzy matching [c9].\n\nFor languages with complex tokenization needs, especially non-space-delimited Asian languages such as Chinese and Japanese, the default tokenizers cannot effectively segment words. To address this, SQLite FTS5 allows developers to create **custom tokenizers** by implementing three core functions: a constructor (xCreate), a destructor (xDelete), and a tokenizing function (xTokenize). This capability enables integration of advanced segmentation algorithms or third-party language processing libraries, improving handling of multilingual data [c1][c5][c6].\n\n## Ranking Algorithms and Scoring Functions\n\nSQLite FTS5 includes built-in support for ranking search results to improve relevance. The extension natively implements the BM25 ranking algorithm, which considers term frequency, inverse document frequency, and document length normalization to score results. This relevance scoring allows applications to display more pertinent results first. Additionally, developers can extend or combine scoring signals to fine-tune ranking to their domain needs [c2][c7][c8].\n\n## Conclusion\n\nSQLite FTS5 is a sophisticated full-text search system supporting customizable indexing and ranking tailored for many languages and applications. It comes with built-in tokenizers and BM25 ranking but requires custom tokenizers to handle languages lacking space-delimited tokens effectively. The extension’s ranking is robust yet limited to predefined algorithms, and its indexing mechanism is optimized for flexible and performant full-text queries within SQLite databases [c1][c4][c5][c7][c9].\n\n## Limitations\n\n- Details on precise tokenization performance impacts or indexing speed in multilingual scenarios are not thoroughly documented in the sourced materials [c1][c4].\n- Information on extending ranking algorithms beyond BM25 through native SQLite FTS5 APIs is limited to best-effort developer implementations without official extensions [c7].",
+        "citations": [
+          {
+            "id": "c1",
+            "document_id": "sample_doc_1",
+            "url": "https://www.slingacademy.com/article/configuring-sqlite-tokenizers-for-multilingual-text-search/",
+            "title": "Configuring SQLite Tokenizers for Multilingual Text Search - Sling Academy",
+            "snippet": "You might need further customization for Asian languages like Chinese or Japanese, where word segmentation is not space-based. Here, you can implement custom tokenizers using FTS5 ",
+            "score": 0.016393,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c2",
+            "document_id": "sample_doc_2",
+            "url": "https://simonwillison.net/2019/Jan/7/exploring-search-relevance-algorithms-sqlite/",
+            "title": "Exploring search relevance algorithms with SQLite",
+            "snippet": "If it’s available to you FTS5 is usually the best option: it has a good ranking algorithm built in. I described how to use it to build fast autocomplete search for your website for",
+            "score": 0.016129,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c3",
+            "document_id": "sample_doc_3",
+            "url": "https://deepwiki.com/sqlite/sqlite/3.1-full-text-search-5-(fts5)",
+            "title": "Full-Text Search 5 (FTS5) | sqlite/sqlite | DeepWiki",
+            "snippet": "FTS5 is SQLite&#x27;s advanced full-text search extension that provides comprehensive text indexing and search capabilities through virtual tables. <strong>This document covers the",
+            "score": 0.015873,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c4",
+            "document_id": "sample_doc_4",
+            "url": "https://www.sqlite.org/fts5.html",
+            "title": "SQLite FTS5 Extension",
+            "snippet": "<strong>Each string in an fts5 query is parsed (&quot;tokenized&quot;) by the tokenizer and a list of zero or more tokens, or terms, extracted</strong>. For example, the default to",
+            "score": 0.015625,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c5",
+            "document_id": "sample_doc_5",
+            "url": "https://www2.sqlite.org/draft/matrix/fts5.html",
+            "title": "SQLite FTS5 Extension",
+            "snippet": "The fts5_api structure methods are described individually in the following sections. To create a custom tokenizer, an application must implement three functions: <strong>a tokenize",
+            "score": 0.015385,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c6",
+            "document_id": "sample_doc_6",
+            "url": "https://medium.com/@johnidouglasmarangon/full-text-search-in-sqlite-a-practical-guide-80a69c3f42a4",
+            "title": "Full-Text Search in SQLite: A Practical Guide | by Johni Douglas Marangon | Medium",
+            "snippet": "This is a common approach to getting started with FTS in SQLite. Tokenizers determine how input text is broken into searchable terms. <strong>FTS5 supports multiple tokenizers to h",
+            "score": 0.015152,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c7",
+            "document_id": "sample_doc_7",
+            "url": "https://ubeyd.dev/ranked-search-on-sqlite",
+            "title": "Ranked Search on SQLite: FTS5, BM25, and an Eight-Signal Scorer",
+            "snippet": "CREATE VIRTUAL TABLE listings_fts USING fts5( title, -- short, high-signal description_text, -- the full HTML-stripped body indexed_org_name, -- the employer tokenize = &#x27;trigr",
+            "score": 0.014925,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c8",
+            "document_id": "sample_doc_8",
+            "url": "https://deepwiki.com/shibing624/TreeSearch/7.1-fts5index-and-sqlite-schema",
+            "title": "FTS5Index and SQLite Schema | shibing624/TreeSearch | DeepWiki",
+            "snippet": "For FTS5 scoring mechanics and BM25 ranking, see FTS5 Scoring and BM25. TreeSearch uses a single SQLite database file (.db) to store all indexing data. The schema consists of four ",
+            "score": 0.014706,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c9",
+            "document_id": "sample_doc_9",
+            "url": "https://audrey.feldroy.com/articles/2025-01-13-SQLite-FTS5-Tokenizers-unicode61-and-ascii",
+            "title": "SQLite FTS5 Tokenizers: `unicode61` and `ascii` — audrey.feldroy.com",
+            "snippet": "The SQLite FTS5 (full-text search) extension includes the built-in tokenizers unicode61, ascii, porter, and trigram, implemented in fts5_tokenize.c.",
+            "score": 0.014493,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c10",
+            "document_id": "sample_doc_10",
+            "url": "https://sqlite.org/search?q=fts5",
+            "title": "Search SQLite Documentation",
+            "snippet": "Page generated by FTS5 in about 32.09 ms.",
+            "score": 0.014286,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          }
+        ],
+        "claim_map": {
+          "SQLite FTS5 is a powerful full-text search extension enabling efficient text indexing and complex search capabilities through virtual tables.": [
+            "c3",
+            "c1",
+            "c9"
+          ],
+          "- SQLite FTS5 uses tokenizers to parse input text into searchable tokens;": [
+            "c6",
+            "c1",
+            "c9"
+          ],
+          "they disallow the addition of types or constraints in their CREATE VIRTUAL TABLE statements [c4].": [
+            "c4"
+          ],
+          "SQLite FTS5 uses virtual tables to index text by breaking down input strings into discrete tokens.": [
+            "c3",
+            "c6",
+            "c4"
+          ],
+          "The indexing mechanism revolves around the tokenizer, which extracts zero or more tokens from each string in documents.": [
+            "c4"
+          ],
+          "These tokens form the searchable terms within the FTS5 table, enabling efficient text lookups.": [
+            "c4",
+            "c6",
+            "c7"
+          ],
+          "Tokenization in SQLite FTS5 is the process of parsing strings into tokens or terms, which are the atomic searchable units.": [
+            "c6",
+            "c4"
+          ],
+          "Out-of-the-box, FTS5 provides several built-in tokenizers:": [
+            "c9"
+          ],
+          "- **ascii**: Assumes ASCII input and tokenizes accordingly.": [
+            "c4",
+            "c6",
+            "c9"
+          ],
+          "- **porter**: Performs Porter stemming for English language word forms.": [
+            "c1"
+          ],
+          "For languages with complex tokenization needs, especially non-space-delimited Asian languages such as Chinese and Japanese, the default tokenizers cannot effectively segment words.": [
+            "c1"
+          ],
+          "SQLite FTS5 includes built-in support for ranking search results to improve relevance.": [
+            "c2"
+          ],
+          "The principal limitations of SQLite FTS5 are related to tokenization for multilingual text search and ranking flexibility:": [
+            "c1",
+            "c3",
+            "c9"
+          ],
+          "- Default tokenizers are insufficient for tokenizing languages with no explicit word boundaries (e.g., Chinese, Japanese), leading to poor search quality without custom tokenizer implementation [c1].": [
+            "c1"
+          ],
+          "- FTS5 virtual tables restrict schema options;": [
+            "c3",
+            "c8",
+            "c1"
+          ],
+          "SQLite FTS5 is a sophisticated full-text search system supporting customizable indexing and ranking tailored for many languages and applications.": [
+            "c1",
+            "c3",
+            "c9"
+          ]
+        },
+        "coverage": 0.381,
+        "summary": "SQLite FTS5 is a powerful full-text search extension enabling efficient text indexing and complex search capabilities through virtual tables. It supports multiple built-in tokenizers and allows for custom tokenizers to handle language-specific tokenization challenges, particularly for non-space-delimited Asian languages. SQLite FTS5 incorporates built-in ranking algorithms, including BM25, to provide relevant and ranked search results. However, its default tokenizers have limitations with some languages, necessitating customization via plugins for robust multilingual support [c1][c4][c5][c6][c7][c9].",
+        "key_takeaways": [
+          "SQLite FTS5 uses tokenizers to parse input text into searchable tokens; the default tokenizers include unicode61, ascii, porter, and trigram [c4][c9].",
+          "Custom tokenizers can be implemented through the FTS5 Custom Plugin API, which requires defining constructor, destructor, and tokenizing functions, facilitating support for complex languages like Chinese and Japanese [c1][c5].",
+          "FTS5 ranking functionality includes built-in algorithms such as BM25, which rank results based on term frequency and document relevance, enhancing query result importance [c2][c7][c8].",
+          "FTS5 tables are virtual tables that index textual content and can be queried using standard SQL; they disallow the addition of types or constraints in their CREATE VIRTUAL TABLE statements [c4].",
+          "The primary limitation in multilingual contexts is that the default tokenizers often inadequately handle languages where token boundaries are unclear and require non-space-based segmentation, making custom tokenizer implementation necessary for effective indexing and search [c1]."
+        ],
+        "limitations": "The principal limitations of SQLite FTS5 are related to tokenization for multilingual text search and ranking flexibility:\n\n- Default tokenizers are insufficient for tokenizing languages with no explicit word boundaries (e.g., Chinese, Japanese), leading to poor search quality without custom tokenizer implementation [c1].\n- Implementing custom tokenizers requires programming effort and familiarity with the FTS5 API, which can be a development hurdle [c1][c5].\n- Ranking beyond the default BM25 is not natively supported but can be approximated or extended via custom query logic or auxiliary tables [c7].\n- FTS5 virtual tables restrict schema options; for example, types, constraints, or primary keys cannot be added, limiting integration scenarios that rely on conventional table features [c4].",
+        "confidence_label": "uncertain",
+        "conflicts": []
+      },
+      "verification": {
+        "status": "completed",
+        "started_at": 1793686012.801129,
+        "completed_at": 1793686023.782639,
+        "coverage": 0.38095238095238093
+      },
+      "confidence_warning": {
+        "reasons": [
+          "coverage_below_threshold"
+        ],
+        "acknowledged": false
+      },
+      "sources": [
+        {
+          "id": "c1",
+          "document_id": "sample_doc_1",
+          "url": "https://www.slingacademy.com/article/configuring-sqlite-tokenizers-for-multilingual-text-search/",
+          "title": "Configuring SQLite Tokenizers for Multilingual Text Search - Sling Academy",
+          "snippet": "You might need further customization for Asian languages like Chinese or Japanese, where word segmentation is not space-based. Here, you can implement custom tokenizers using FTS5 ",
+          "score": 0.016393,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c2",
+          "document_id": "sample_doc_2",
+          "url": "https://simonwillison.net/2019/Jan/7/exploring-search-relevance-algorithms-sqlite/",
+          "title": "Exploring search relevance algorithms with SQLite",
+          "snippet": "If it’s available to you FTS5 is usually the best option: it has a good ranking algorithm built in. I described how to use it to build fast autocomplete search for your website for",
+          "score": 0.016129,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c3",
+          "document_id": "sample_doc_3",
+          "url": "https://deepwiki.com/sqlite/sqlite/3.1-full-text-search-5-(fts5)",
+          "title": "Full-Text Search 5 (FTS5) | sqlite/sqlite | DeepWiki",
+          "snippet": "FTS5 is SQLite&#x27;s advanced full-text search extension that provides comprehensive text indexing and search capabilities through virtual tables. <strong>This document covers the",
+          "score": 0.015873,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c4",
+          "document_id": "sample_doc_4",
+          "url": "https://www.sqlite.org/fts5.html",
+          "title": "SQLite FTS5 Extension",
+          "snippet": "<strong>Each string in an fts5 query is parsed (&quot;tokenized&quot;) by the tokenizer and a list of zero or more tokens, or terms, extracted</strong>. For example, the default to",
+          "score": 0.015625,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c5",
+          "document_id": "sample_doc_5",
+          "url": "https://www2.sqlite.org/draft/matrix/fts5.html",
+          "title": "SQLite FTS5 Extension",
+          "snippet": "The fts5_api structure methods are described individually in the following sections. To create a custom tokenizer, an application must implement three functions: <strong>a tokenize",
+          "score": 0.015385,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c6",
+          "document_id": "sample_doc_6",
+          "url": "https://medium.com/@johnidouglasmarangon/full-text-search-in-sqlite-a-practical-guide-80a69c3f42a4",
+          "title": "Full-Text Search in SQLite: A Practical Guide | by Johni Douglas Marangon | Medium",
+          "snippet": "This is a common approach to getting started with FTS in SQLite. Tokenizers determine how input text is broken into searchable terms. <strong>FTS5 supports multiple tokenizers to h",
+          "score": 0.015152,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c7",
+          "document_id": "sample_doc_7",
+          "url": "https://ubeyd.dev/ranked-search-on-sqlite",
+          "title": "Ranked Search on SQLite: FTS5, BM25, and an Eight-Signal Scorer",
+          "snippet": "CREATE VIRTUAL TABLE listings_fts USING fts5( title, -- short, high-signal description_text, -- the full HTML-stripped body indexed_org_name, -- the employer tokenize = &#x27;trigr",
+          "score": 0.014925,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c8",
+          "document_id": "sample_doc_8",
+          "url": "https://deepwiki.com/shibing624/TreeSearch/7.1-fts5index-and-sqlite-schema",
+          "title": "FTS5Index and SQLite Schema | shibing624/TreeSearch | DeepWiki",
+          "snippet": "For FTS5 scoring mechanics and BM25 ranking, see FTS5 Scoring and BM25. TreeSearch uses a single SQLite database file (.db) to store all indexing data. The schema consists of four ",
+          "score": 0.014706,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c9",
+          "document_id": "sample_doc_9",
+          "url": "https://audrey.feldroy.com/articles/2025-01-13-SQLite-FTS5-Tokenizers-unicode61-and-ascii",
+          "title": "SQLite FTS5 Tokenizers: `unicode61` and `ascii` — audrey.feldroy.com",
+          "snippet": "The SQLite FTS5 (full-text search) extension includes the built-in tokenizers unicode61, ascii, porter, and trigram, implemented in fts5_tokenize.c.",
+          "score": 0.014493,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c10",
+          "document_id": "sample_doc_10",
+          "url": "https://sqlite.org/search?q=fts5",
+          "title": "Search SQLite Documentation",
+          "snippet": "Page generated by FTS5 in about 32.09 ms.",
+          "score": 0.014286,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        }
+      ]
+    }
+  },
+  {
+    "mode": "council",
+    "query": "Assess the documented benefits and limitations of SQLite FTS5 for a local research application, with sources.",
+    "status": "completed",
+    "result": {
+      "answer": {
+        "text": "## Agreement\n- SQLite FTS5 is a built-in full-text search extension implemented as a virtual table module offering fast `MATCH` queries with ranking, snippets, and highlighting, enabling efficient indexed text search within local applications [c1][c2][c7].  \n- It uses a relevance scoring model based on term frequency, inverse document frequency, and document-length normalization, supporting ordered, pertinent search results out-of-the-box, with extensible scoring options for domain tuning [c1][c7].  \n- FTS5’s lightweight, in-process embedding in SQLite makes it especially suitable for local research applications prioritizing minimal deployment friction and consolidated storage of source text, metadata, and indexes in a single SQLite file [c2][c4][c7].  \n- Performance is generally strong, with reported query response times under 5 milliseconds on standard laptops for databases with hundreds of thousands of rows, enabling responsive interactive use [c4][c5].  \n- A major documented storage limitation is FTS5’s default behavior of duplicating row content alongside the index, leading to increased disk usage for larger datasets; this can be mitigated by configuring external content tables that index text while reading original rows from separate tables [c3].  \n- The effective overall application speed depends on workload design; FTS5 accelerates indexed search, but if the processing bottleneck lies elsewhere (e.g., additional application logic), the net speedup may be minimal [c6].\n\n## Disagreement\n- **Performance impact in real-world applications:**  \n  - Member A emphasizes that FTS5 provides sub-5 ms query times supporting responsive local research tools [c5].  \n  - Member B concurs with this but adds that, in at least one practical case, the overall application did not observe noticeable speedup when integrating FTS5, due to non-search-related bottlenecks such as abbreviation generation [c6].  \n  - **Reason for difference:** This reflects the variation in workload composition and integration complexity; while FTS5 is fast intrinsically, actual application speed depends on the full processing pipeline.\n\n- **Advanced search capabilities and semantics:**  \n  - Member B notes that FTS5 provides lexical matching and statistical ranking only, lacking semantic search capabilities, which requires pairing with vector embeddings; this hybrid model increases latency beyond FTS5’s sub-5 ms response times [c4][c5].  \n  - Member A focuses more on FTS5’s built-in ranking and extensibility without emphasizing semantic or vector-based limitations [c1].  \n  - **Reason for difference:** Members emphasize different aspects of search sophistication — lexical vs. semantic — according to sources with distinct foci.\n\n## Unique findings\n- Member A highlights FTS5’s built-in support for generating snippets and highlighting to facilitate user-facing exploratory interfaces, reducing the integration burden [c7].  \n- Member B elaborates on the hybrid local-first architecture pattern combining FTS5 with vector indexes within one SQLite file, underscoring modern trends in research tooling for offline, consolidated storage and retrieval [c4].  \n- Member B explicitly quantifies the vector embedding query latencies (50–200 ms), contrasting sharply with FTS5’s lexical search speed, illustrating the practical cost of extending to semantic queries [c5].\n\n## Synthesis\nSQLite FTS5 offers a robust, lightweight full-text search solution embedded directly within SQLite that enables fast, ranked, and feature-rich lexical text retrieval well-suited for local research applications prioritizing ease of integration, single-file architecture, and low-latency queries on medium-scale datasets. Its architectural design aligns with local-first workflows that benefit from co-located data and indexes. However, practitioners should plan for potential storage overhead unless using external content tables and recognize that overall application responsiveness depends on the entire processing pipeline beyond search. Moreover, extending beyond lexical search to semantic capabilities requires hybrid models combining FTS5 with vector embeddings, which incur higher latency and complexity [c1][c2][c3][c4][c5][c6][c7].",
+        "citations": [
+          {
+            "id": "c1",
+            "document_id": "sample_doc_1",
+            "url": "",
+            "title": "Deep report: Research the documented indexing, tokenization and ranking features of SQLite...",
+            "snippet": "frequency, inverse document frequency, and document length normalization to score results. This relevance scoring allows applications to display more pertinent results first. Addit",
+            "score": 0.016393,
+            "origin": "local",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c2",
+            "document_id": "sample_doc_2",
+            "url": "https://blog.sqlite.ai/fts5-sqlite-text-search-extension",
+            "title": "SQLite Extensions: Full-text search with FTS5",
+            "snippet": "It <strong>enables efficient search queries on a corpus of documents</strong>, making it ideal for applications requiring text search capabilities, such as email clients or documen",
+            "score": 0.016129,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c3",
+            "document_id": "sample_doc_3",
+            "url": "https://manujpaliwal.substack.com/p/sqlite-fts5-the-full-text-search",
+            "title": "SQLite FTS5: The Full-Text Search Engine Already in Your App",
+            "snippet": "<strong>By default FTS5 keeps a copy of your rows alongside the index</strong>. Fine for small stuff. Wasteful once your data grows. The fix is external content tables — FTS5 index",
+            "score": 0.015873,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c4",
+            "document_id": "sample_doc_4",
+            "url": "https://joinloop.co.in/blog/local-first-rag-sqlite-vec-fts5-hybrid-search",
+            "title": "Local-First RAG with SQLite: Hybrid Search Using sqlite-vec, FTS5, and Reciprocal Rank Fusion | Joinloop Blog | Joinloop",
+            "snippet": "The pattern that keeps showing up in this year&#x27;s agent tooling is local-first retrieval: one SQLite file holding the text, the metadata, a full-text index, and a vector index.",
+            "score": 0.015625,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c5",
+            "document_id": "sample_doc_5",
+            "url": "https://appliedintelligencesystems.com/local-knowledge-base-fts5-vector-search-sqlite/",
+            "title": "Local Knowledge Base Search With FTS5 and Vector Embeddings—No Cloud Required – Applied Intelligence",
+            "snippet": "On a standard laptop, FTS5 queries return in under 5 milliseconds for databases with hundreds of thousands of rows. Vector queries add 50–200ms depending on the embedding model and",
+            "score": 0.015385,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c6",
+            "document_id": "sample_doc_6",
+            "url": "https://dzolnai.medium.com/speed-up-searching-in-your-app-by-using-sqlite-and-fts-8896ab74b598",
+            "title": "Speed up searching in your app by using SQLite and FTS | by Daniel Zolnai | Medium",
+            "snippet": "I did not see a noticeable performance change when using FTS5. This is mostly due to the fact that in the database version the majority of the time is not spent loading the rows in",
+            "score": 0.015152,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          },
+          {
+            "id": "c7",
+            "document_id": "sample_doc_7",
+            "url": "https://cetinardal.com/blog/articles/what-is-sqlite-fts5_en/",
+            "title": "What is SQLite FTS5? | Çetin Ardal",
+            "snippet": "FTS5 is SQLite&#x27;s full-text search extension: a virtual table module that indexes text for fast MATCH queries with ranking, snippets, and highlighting.",
+            "score": 0.014925,
+            "origin": "external",
+            "grounding_eligible": true,
+            "source_status": "active"
+          }
+        ],
+        "claim_map": {
+          "- **Performance impact in real-world applications:**": [
+            "c1",
+            "c2",
+            "c6"
+          ],
+          "- Member B concurs with this but adds that, in at least one practical case, the overall application did not observe noticeable speedup when integrating FTS5, due to non-search-related bottlenecks such as abbreviation generation [c6].": [
+            "c6"
+          ],
+          "while FTS5 is fast intrinsically, actual application speed depends on the full processing pipeline.": [
+            "c7",
+            "c5"
+          ],
+          "- **Advanced search capabilities and semantics:**": [
+            "c2",
+            "c7"
+          ],
+          "- Member B elaborates on the hybrid local-first architecture pattern combining FTS5 with vector indexes within one SQLite file, underscoring modern trends in research tooling for offline, consolidated storage and retrieval [c4].": [
+            "c4"
+          ],
+          "- Member B explicitly quantifies the vector embedding query latencies (50–200 ms), contrasting sharply with FTS5’s lexical search speed, illustrating the practical cost of extending to semantic queries [c5].": [
+            "c5"
+          ],
+          "Its architectural design aligns with local-first workflows that benefit from co-located data and indexes.": [
+            "c3",
+            "c4"
+          ]
+        },
+        "coverage": 0.2593,
+        "summary": "",
+        "key_takeaways": [],
+        "limitations": "- Benchmarking evidence is limited and workload-dependent: one source reports sub-5 ms query times for hundreds of thousands of rows, while another finds no net application speedup due to non-search bottlenecks [c5][c6].  \n- Advanced semantic search is not natively supported by FTS5 and requires additional infrastructure, which impacts latency and complexity [c4][c5].",
+        "confidence_label": "uncertain",
+        "conflicts": []
+      },
+      "verification": {
+        "status": "completed",
+        "started_at": 1793686032.9144347,
+        "completed_at": 1793686066.0885696,
+        "coverage": 0.25925925925925924
+      },
+      "confidence_warning": {
+        "reasons": [
+          "coverage_below_threshold"
+        ],
+        "acknowledged": false
+      },
+      "sources": [
+        {
+          "id": "c1",
+          "document_id": "sample_doc_1",
+          "url": "",
+          "title": "Deep report: Research the documented indexing, tokenization and ranking features of SQLite...",
+          "snippet": "frequency, inverse document frequency, and document length normalization to score results. This relevance scoring allows applications to display more pertinent results first. Addit",
+          "score": 0.016393,
+          "origin": "local",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c2",
+          "document_id": "sample_doc_2",
+          "url": "https://blog.sqlite.ai/fts5-sqlite-text-search-extension",
+          "title": "SQLite Extensions: Full-text search with FTS5",
+          "snippet": "It <strong>enables efficient search queries on a corpus of documents</strong>, making it ideal for applications requiring text search capabilities, such as email clients or documen",
+          "score": 0.016129,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c3",
+          "document_id": "sample_doc_3",
+          "url": "https://manujpaliwal.substack.com/p/sqlite-fts5-the-full-text-search",
+          "title": "SQLite FTS5: The Full-Text Search Engine Already in Your App",
+          "snippet": "<strong>By default FTS5 keeps a copy of your rows alongside the index</strong>. Fine for small stuff. Wasteful once your data grows. The fix is external content tables — FTS5 index",
+          "score": 0.015873,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c4",
+          "document_id": "sample_doc_4",
+          "url": "https://joinloop.co.in/blog/local-first-rag-sqlite-vec-fts5-hybrid-search",
+          "title": "Local-First RAG with SQLite: Hybrid Search Using sqlite-vec, FTS5, and Reciprocal Rank Fusion | Joinloop Blog | Joinloop",
+          "snippet": "The pattern that keeps showing up in this year&#x27;s agent tooling is local-first retrieval: one SQLite file holding the text, the metadata, a full-text index, and a vector index.",
+          "score": 0.015625,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c5",
+          "document_id": "sample_doc_5",
+          "url": "https://appliedintelligencesystems.com/local-knowledge-base-fts5-vector-search-sqlite/",
+          "title": "Local Knowledge Base Search With FTS5 and Vector Embeddings—No Cloud Required – Applied Intelligence",
+          "snippet": "On a standard laptop, FTS5 queries return in under 5 milliseconds for databases with hundreds of thousands of rows. Vector queries add 50–200ms depending on the embedding model and",
+          "score": 0.015385,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c6",
+          "document_id": "sample_doc_6",
+          "url": "https://dzolnai.medium.com/speed-up-searching-in-your-app-by-using-sqlite-and-fts-8896ab74b598",
+          "title": "Speed up searching in your app by using SQLite and FTS | by Daniel Zolnai | Medium",
+          "snippet": "I did not see a noticeable performance change when using FTS5. This is mostly due to the fact that in the database version the majority of the time is not spent loading the rows in",
+          "score": 0.015152,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        },
+        {
+          "id": "c7",
+          "document_id": "sample_doc_7",
+          "url": "https://cetinardal.com/blog/articles/what-is-sqlite-fts5_en/",
+          "title": "What is SQLite FTS5? | Çetin Ardal",
+          "snippet": "FTS5 is SQLite&#x27;s full-text search extension: a virtual table module that indexes text for fast MATCH queries with ranking, snippets, and highlighting.",
+          "score": 0.014925,
+          "origin": "external",
+          "grounding_eligible": true,
+          "source_status": "active"
+        }
+      ]
+    }
+  }
+]

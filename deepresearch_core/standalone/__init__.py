@@ -1,0 +1,1 @@
+"""Standalone DeepResearch runtime implementation."""

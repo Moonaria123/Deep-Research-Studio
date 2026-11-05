@@ -1,0 +1,26 @@
+{
+  "council": {
+    "max_output_tokens": 1400,
+    "max_searches": 4,
+    "timeout_s": 120,
+    "top_k": 8
+  },
+  "deep": {
+    "max_output_tokens": 3600,
+    "max_searches": 6,
+    "timeout_s": 180,
+    "top_k": 10
+  },
+  "fast": {
+    "max_output_tokens": 700,
+    "max_searches": 1,
+    "timeout_s": 30,
+    "top_k": 6
+  },
+  "multiple": {
+    "max_output_tokens": 1200,
+    "max_searches": 4,
+    "timeout_s": 60,
+    "top_k": 8
+  }
+}
