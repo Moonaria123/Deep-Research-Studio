@@ -19,7 +19,7 @@ python-dateutil==4.0.0
 python-dotenv==1.2.4
 python-multipart==0.0.32
 PyYAML==6.0.3
-redis==6.4.0
+redis==8.1.0
 rq==2.10.0
 starlette==1.10.0
 typing-inspection==0.4.4
