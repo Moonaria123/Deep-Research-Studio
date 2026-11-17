@@ -405,7 +405,7 @@ describe("Composer", () => {
     fireEvent.change(screen.getByLabelText("Extra subqueries"), { target: { value: "alpha\nbeta" } });
     fireEvent.change(screen.getByLabelText("Search country"), { target: { value: "SG" } });
     fireEvent.change(screen.getByLabelText("Search language"), { target: { value: "zh-hans" } });
-    fireEvent.change(screen.getByLabelText("搜索结果界面语言"), { target: { value: "zh-Hans-SG" } });
+    fireEvent.change(screen.getByLabelText("Search results interface language"), { target: { value: "zh-Hans-SG" } });
 
     fireEvent.click(screen.getByLabelText("Send"));
 

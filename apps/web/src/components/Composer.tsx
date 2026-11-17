@@ -589,15 +589,15 @@ export function Composer({
                   />
                 </label>
                 <label className="space-y-1 text-xs text-text-muted sm:col-span-2">
-                  <span>搜索结果界面语言</span>
+                  <span>Search results interface language</span>
                   <Input
                     value={uiLanguage}
                     onChange={(e) => setUiLanguage(e.target.value)}
                     placeholder="zh-Hans-CN"
                     maxLength={35}
-                    aria-label="搜索结果界面语言"
+                    aria-label="Search results interface language"
                   />
-                  <span className="block text-text-faint">仅影响搜索提供方的结果界面语言，不控制应用界面或报告输出语言。</span>
+                  <span className="block text-text-faint">Only affects the search provider's results interface language, not the app interface or report language.</span>
                 </label>
                 <label className="space-y-1 text-xs text-text-muted sm:col-span-2">
                   <span>Extra subqueries</span>

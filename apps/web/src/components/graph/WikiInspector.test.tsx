@@ -140,8 +140,8 @@ describe("WikiInspector", () => {
     expect(screen.getByText("Concept key:")).toBeInTheDocument();
     expect(screen.getByText("Wiki snapshot is from an older graph version.")).toBeInTheDocument();
     expect(screen.getByText("Wiki snapshot is partial.")).toBeInTheDocument();
-    expect(screen.getByText("Evidence 引用不合法")).toBeInTheDocument();
-    expect(screen.getByText("这是旧快照常见错误；请在当前版本重新 Refresh Wiki，让系统用新的 evidence allowlist 生成。")).toBeInTheDocument();
+    expect(screen.getByText("Invalid evidence reference")).toBeInTheDocument();
+    expect(screen.getByText("This can occur with older snapshots. Select Refresh Wiki in the current version to regenerate topics using the updated set of allowed evidence.")).toBeInTheDocument();
     expect(screen.getByText("1 dropped refs")).toBeInTheDocument();
     expect(screen.getByText("Risk taxonomy evidence.")).toBeInTheDocument();
     expect(screen.queryByText("req-hidden")).not.toBeInTheDocument();

@@ -67,32 +67,37 @@ test("preset run replays without model interaction", async ({ page }) => {
   await page.getByRole("button", { name: "Send" }).click();
   await expect(page).toHaveURL(/#\/run\/demo-fast$/);
   await expect(page.getByText(/MATCH operator/i).first()).toBeVisible();
-  await expect(page.getByLabel("正在核验报告")).toBeVisible();
-  await expect(page.getByLabel("核验完成")).toBeVisible({ timeout: 5_000 });
+  await expect(page.getByLabel("Verifying report")).toBeVisible();
+  await expect(page.getByLabel("Verification complete", { exact: true })).toBeVisible({ timeout: 5_000 });
 });
 
 test("low confidence warning can be acknowledged or replayed without persistence", async ({ page }) => {
   await page.goto(previewUrl("run/demo-fast"));
-  await page.getByRole("button", { name: "查看低置信度警告" }).click();
-  await expect(page.getByRole("dialog", { name: "低置信度警告" })).toBeVisible();
-  await page.getByRole("button", { name: "确认并忽略" }).click();
-  await expect(page.getByRole("button", { name: "低置信度风险已确认" })).toBeVisible();
+  await page.getByRole("button", { name: "View low-confidence warning" }).click();
+  await expect(page.getByRole("dialog", { name: "Low-confidence warning" })).toBeVisible();
+  await page.getByRole("button", { name: "Accept and dismiss" }).click();
+  await expect(page.getByRole("button", { name: "Low-confidence risk accepted" })).toBeVisible();
 
   await page.reload();
-  await page.getByRole("button", { name: "查看低置信度警告" }).click();
-  await page.getByRole("button", { name: "重新出具" }).click();
+  await page.getByRole("button", { name: "View low-confidence warning" }).click();
+  await page.getByRole("button", { name: "Regenerate report" }).click();
   await expect(page).toHaveURL(/#\/run\/demo-regenerated$/);
-  await expect(page.getByLabel("正在核验报告")).toBeVisible();
+  await expect(page.getByLabel("Verifying report")).toBeVisible();
 });
 
 test("dangerous actions are disabled while preview navigation remains available", async ({ page }) => {
   await page.goto(previewUrl("library"));
   await expect(page.getByRole("button", { name: "Index" })).toBeDisabled();
   await expect(page.getByRole("button", { name: "Import" })).toBeDisabled();
+  await expect(page.getByText("Choose file", { exact: true })).toBeVisible();
+  await expect(page.getByText("No file chosen", { exact: true })).toBeVisible();
+  await expect(page.getByLabel("Local document file")).toHaveCSS("opacity", "0");
   await page.goto(previewUrl("library/notes"));
   await expect(page.getByRole("button", { name: "Add note" })).toBeDisabled();
   await page.goto(previewUrl("library/reports"));
   await expect(page.getByRole("button", { name: "Upload" })).toBeDisabled();
+  await expect(page.getByText("Choose file", { exact: true })).toBeVisible();
+  await expect(page.getByLabel("Report file")).toHaveCSS("opacity", "0");
 
   await page.goto(previewUrl("memory"));
   await expect(page.getByRole("button", { name: "Refresh", exact: true })).toBeDisabled();

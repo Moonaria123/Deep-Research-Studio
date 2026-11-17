@@ -77,7 +77,7 @@ export function History() {
       <div data-anim className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-2xl font-bold text-text">History</h1>
         <Link to="/history/archived" className="text-sm text-accent hover:underline focus-ring rounded">
-          已归档会话 →
+          Archived sessions →
         </Link>
       </div>
       <div data-anim className="relative mb-4">

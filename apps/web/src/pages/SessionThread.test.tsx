@@ -123,7 +123,7 @@ describe("SessionThread", () => {
     );
     expect(await screen.findByText("What is a qubit?")).toBeInTheDocument();
     expect(screen.getByText("A qubit is a quantum bit.")).toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: /查看/ }));
+    fireEvent.click(screen.getByRole("button", { name: /View (full report|run details)/ }));
     expect(await screen.findByTestId("run-panel")).toHaveTextContent("run-1");
   });
 
@@ -147,7 +147,7 @@ describe("SessionThread", () => {
     fireEvent.click(screen.getByRole("button", { name: "Show" }));
     fireEvent.change(screen.getByLabelText("Search country"), { target: { value: "SG" } });
     fireEvent.change(screen.getByLabelText("Search language"), { target: { value: "zh-hans" } });
-    fireEvent.change(screen.getByLabelText("搜索结果界面语言"), { target: { value: "zh-Hans-SG" } });
+    fireEvent.change(screen.getByLabelText("Search results interface language"), { target: { value: "zh-Hans-SG" } });
     fireEvent.click(screen.getByLabelText("Send"));
     await waitFor(() =>
       expect(api.createRun).toHaveBeenCalledWith(
@@ -348,6 +348,6 @@ describe("SessionThread", () => {
         <SessionThread />
       </MemoryRouter>,
     );
-    expect(await screen.findByRole("alert")).toHaveTextContent("已归档");
+    expect(await screen.findByRole("alert")).toHaveTextContent("This session is archived");
   });
 });

@@ -50,14 +50,14 @@ export function ArchivedHistory() {
   return (
     <div ref={ref} className="mx-auto w-full max-w-[820px] px-6 py-8">
       <div data-anim className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-bold text-text">已归档会话</h1>
+        <h1 className="text-2xl font-bold text-text">Archived sessions</h1>
         <Link to="/history" className="text-sm text-accent hover:underline focus-ring rounded">
           ← Back to History
         </Link>
       </div>
       <ul className="divide-y divide-border rounded-md border border-border bg-surface">
         {sessions.length === 0 && (
-          <li className="px-4 py-6 text-center text-sm text-text-muted">暂无已归档会话</li>
+          <li className="px-4 py-6 text-center text-sm text-text-muted">No archived sessions</li>
         )}
         {sessions.map((s) => (
           <li key={s.id} data-anim className="flex items-center gap-3 px-4 py-3">

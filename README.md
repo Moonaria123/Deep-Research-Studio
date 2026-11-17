@@ -45,6 +45,8 @@
 
 Deep Research Studio keeps the research workflow in one local Web application. Choose the depth of work, connect your own model and search providers, follow research progress, inspect claim-level sources, and keep useful reports, notes, memories, and topic relationships close to the evidence that created them.
 
+The application interface is in English. This README is available in English and Simplified Chinese.
+
 The report is delivered as soon as writing completes. Verification continues in the background and updates the confidence indicator when it finishes. A low-confidence result remains available: you can inspect the warning, accept the risk, or ask the application to research again using the current evidence plus a new search.
 
 ## What you can do

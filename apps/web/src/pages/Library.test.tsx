@@ -4,6 +4,13 @@ import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { Library } from "./Library";
 import { api } from "@/lib/api";
 
+const runtimeState = vi.hoisted(() => ({ isDemo: false }));
+
+vi.mock("@/lib/runtime", async () => {
+  const actual = await vi.importActual<typeof import("@/lib/runtime")>("@/lib/runtime");
+  return { ...actual, get IS_DEMO() { return runtimeState.isDemo; } };
+});
+
 vi.mock("@/lib/api", async () => {
   const actual = await vi.importActual<typeof import("@/lib/api")>("@/lib/api");
   return {
@@ -46,6 +53,7 @@ function renderLibrary(initialPath = "/library") {
 describe("Library", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    runtimeState.isDemo = false;
     vi.mocked(api.listLibraryDocuments).mockResolvedValue({ documents: [] });
     vi.mocked(api.listLibraryNotes).mockResolvedValue({ notes: [] });
     vi.mocked(api.listLibraryReports).mockResolvedValue({ reports: [] });
@@ -142,8 +150,11 @@ describe("Library", () => {
       .mockResolvedValue({ documents: [imported] });
 
     renderLibrary();
-    const file = new File(["%PDF fixture"], "document.pdf", { type: "application/pdf" });
+    expect(screen.getByText("Choose file")).toBeInTheDocument();
+    expect(screen.getByText("No file chosen")).toBeInTheDocument();
+    const file = new File(["%PDF fixture"], "研究资料.pdf", { type: "application/pdf" });
     fireEvent.change(await screen.findByLabelText("Local document file"), { target: { files: [file] } });
+    expect(screen.getByText("研究资料.pdf")).toBeInTheDocument();
     fireEvent.change(screen.getByLabelText("Local document title"), { target: { value: "Imported document" } });
     fireEvent.click(screen.getByRole("button", { name: /^import$/i }));
 
@@ -151,6 +162,8 @@ describe("Library", () => {
       expect(api.importLibraryDocument).toHaveBeenCalledWith(file, "Imported document"),
     );
     expect(await screen.findByText(/already imported/i)).toBeInTheDocument();
+    expect(screen.getByText("No file chosen")).toBeInTheDocument();
+    expect(screen.queryByText("研究资料.pdf")).not.toBeInTheDocument();
     expect(await screen.findByText(/extracted text is searchable/i)).toBeInTheDocument();
     expect(screen.queryByRole("link", { name: /open latest web page/i })).not.toBeInTheDocument();
   });
@@ -284,14 +297,32 @@ describe("Library", () => {
     renderLibrary();
     fireEvent.click(await screen.findByRole("button", { name: /reports/i }));
 
-    const file = new File(["# Uploaded\n\nBody"], "uploaded.md", { type: "text/markdown" });
+    expect(screen.getByText("Choose file")).toBeInTheDocument();
+    expect(screen.getByText("No file chosen")).toBeInTheDocument();
+    const file = new File(["# Uploaded\n\nBody"], "研究报告.md", { type: "text/markdown" });
     fireEvent.change(screen.getByLabelText("Report file"), { target: { files: [file] } });
+    expect(screen.getByText("研究报告.md")).toBeInTheDocument();
     fireEvent.change(screen.getByLabelText("Report title"), { target: { value: "Uploaded report" } });
     fireEvent.click(screen.getByRole("button", { name: /upload/i }));
 
     await waitFor(() => expect(api.uploadLibraryReport).toHaveBeenCalledTimes(1));
     expect(api.uploadLibraryReport).toHaveBeenCalledWith(file, "Uploaded report");
     await waitFor(() => expect(api.listLibraryReports).toHaveBeenCalledTimes(2));
+    expect(screen.getByText("No file chosen")).toBeInTheDocument();
+    expect(screen.queryByText("研究报告.md")).not.toBeInTheDocument();
+  });
+
+  it("keeps both file pickers disabled in the UI preview", async () => {
+    runtimeState.isDemo = true;
+    renderLibrary();
+    expect(await screen.findByLabelText("Local document file")).toBeDisabled();
+    expect(screen.getByRole("button", { name: /^import$/i })).toBeDisabled();
+
+    fireEvent.click(screen.getByRole("button", { name: /reports/i }));
+    expect(await screen.findByLabelText("Report file")).toBeDisabled();
+    expect(screen.getByRole("button", { name: /upload/i })).toBeDisabled();
+    expect(api.importLibraryDocument).not.toHaveBeenCalled();
+    expect(api.uploadLibraryReport).not.toHaveBeenCalled();
   });
 
   it("opens the notes tab from a knowledge-graph deep link", async () => {

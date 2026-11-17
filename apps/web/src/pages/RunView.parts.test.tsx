@@ -72,6 +72,29 @@ describe("RunView Answer", () => {
     expect(screen.queryByText("Established")).toBeNull();
   });
 
+  it("shows saved system coverage notices in English without translating the report body", () => {
+    const statement = "时效范围：现有证据未提供可核验的事实生效或来源发布时间，无法确认其覆盖到当前时点。";
+    render(
+      <Answer
+        answer={{ ...baseAnswer, text: "用户报告正文。" }}
+        temporalCoverage={{
+          intent: "latest",
+          checked_at: 10,
+          status: "unknown",
+          basis: "none",
+          evidence_ids: [],
+          reason_codes: ["temporal_coverage_unknown"],
+          statement,
+          note_required: true,
+        }}
+      />,
+    );
+
+    expect(screen.queryByText(statement)).toBeNull();
+    expect(screen.getAllByText(/coverage through the present cannot be confirmed/)).toHaveLength(2);
+    expect(screen.getByText("用户报告正文。")).toBeInTheDocument();
+  });
+
   it("renders temporal scope before the body and keeps conflict/freshness notes after it", () => {
     const { container } = render(
       <Answer
@@ -107,8 +130,8 @@ describe("RunView Answer", () => {
 
     const text = container.textContent ?? "";
     expect(text.indexOf("Temporal scope is not fully verifiable.")).toBeLessThan(text.indexOf("Solar is renewable"));
-    expect(text.indexOf("Solar is renewable")).toBeLessThan(text.indexOf("证据冲突附注"));
-    expect(text.indexOf("证据冲突附注")).toBeLessThan(text.indexOf("时效性附注"));
+    expect(text.indexOf("Solar is renewable")).toBeLessThan(text.indexOf("Evidence conflict notes"));
+    expect(text.indexOf("Evidence conflict notes")).toBeLessThan(text.indexOf("Freshness notes"));
     expect(screen.getByText(/Solar cost moved in opposite directions/)).toBeInTheDocument();
   });
 });
@@ -226,9 +249,9 @@ describe("CouncilView", () => {
     expect(text.indexOf("Council evidence is not fully current.")).toBeLessThan(
       text.indexOf("Solar is renewable"),
     );
-    expect(text.indexOf("Solar is renewable")).toBeLessThan(text.indexOf("证据冲突附注"));
-    expect(text.indexOf("证据冲突附注")).toBeLessThan(text.indexOf("时效性附注"));
-    expect(text.indexOf("时效性附注")).toBeLessThan(text.indexOf("Limitations"));
+    expect(text.indexOf("Solar is renewable")).toBeLessThan(text.indexOf("Evidence conflict notes"));
+    expect(text.indexOf("Evidence conflict notes")).toBeLessThan(text.indexOf("Freshness notes"));
+    expect(text.indexOf("Freshness notes")).toBeLessThan(text.indexOf("Limitations"));
     expect(text.indexOf("Limitations")).toBeLessThan(text.indexOf("sources cited"));
     expect(text.indexOf("sources cited")).toBeLessThan(text.indexOf("Member perspectives"));
   });
@@ -248,7 +271,7 @@ describe("CouncilView", () => {
     );
 
     expect(screen.getByText("Contested")).toBeInTheDocument();
-    expect(screen.queryByLabelText("证据冲突附注")).toBeNull();
+    expect(screen.queryByLabelText("Evidence conflict notes")).toBeNull();
   });
 });
 
@@ -783,7 +806,7 @@ describe("RunView T10 states", () => {
     } as Run);
 
     expect(screen.getByText(/Solar is renewable/)).toBeInTheDocument();
-    expect(screen.getByRole("status", { name: "正在核验报告" })).toHaveTextContent("正在核验报告置信度");
+    expect(screen.getByRole("status", { name: "Verifying report" })).toHaveTextContent("Verifying report confidence");
     expect(screen.getByRole("button", { name: /export/i })).toBeEnabled();
     expect(screen.getByRole("button", { name: /save to memory/i })).toBeEnabled();
     expect(screen.queryByText(/confidence 80%/i)).toBeNull();
@@ -807,7 +830,7 @@ describe("RunView T10 states", () => {
       },
     } as Run);
 
-    expect(screen.getByRole("status", { name: "正在核验报告" })).toBeInTheDocument();
+    expect(screen.getByRole("status", { name: "Verifying report" })).toBeInTheDocument();
     expect(screen.queryByText(/Consensus strength/i)).toBeNull();
     expect(screen.queryByText("62%")).toBeNull();
   });
@@ -844,8 +867,8 @@ describe("RunView T10 states", () => {
       });
 
       expect(api.getRun).toHaveBeenCalledWith("r1");
-      expect(screen.getByRole("status", { name: "核验完成" })).toBeInTheDocument();
-      expect(screen.queryByRole("status", { name: "正在核验报告" })).toBeNull();
+      expect(screen.getByRole("status", { name: "Verification complete" })).toBeInTheDocument();
+      expect(screen.queryByRole("status", { name: "Verifying report" })).toBeNull();
     } finally {
       vi.useRealTimers();
     }
@@ -869,17 +892,17 @@ describe("RunView T10 states", () => {
       },
     } as Run);
 
-    expect(screen.getByRole("status", { name: "核验完成" })).toHaveTextContent("置信度信息已更新");
-    fireEvent.click(screen.getByRole("button", { name: "查看低置信度警告" }));
+    expect(screen.getByRole("status", { name: "Verification complete" })).toHaveTextContent("Confidence information has been updated");
+    fireEvent.click(screen.getByRole("button", { name: "View low-confidence warning" }));
     expect(screen.getByRole("dialog")).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "低置信度警告" })).toBeInTheDocument();
-    expect(screen.getByRole("list", { name: "低置信度原因" })).toHaveTextContent("部分内容尚缺乏充分证据支持");
-    expect(screen.getByRole("list", { name: "低置信度原因" })).toHaveTextContent("请核查关键结论");
+    expect(screen.getByRole("heading", { name: "Low-confidence warning" })).toBeInTheDocument();
+    expect(screen.getByRole("list", { name: "Reasons for low confidence" })).toHaveTextContent("Some content lacks sufficient evidence");
+    expect(screen.getByRole("list", { name: "Reasons for low confidence" })).toHaveTextContent("Please verify the key conclusions");
     expect(screen.queryByText("internal_new_reason")).toBeNull();
-    fireEvent.click(screen.getByRole("button", { name: "确认并忽略" }));
+    fireEvent.click(screen.getByRole("button", { name: "Accept and dismiss" }));
 
     await waitFor(() => expect(api.acknowledgeRunConfidence).toHaveBeenCalledWith("r1"));
-    expect(screen.getByRole("button", { name: "低置信度风险已确认" })).toBeInTheDocument();
+    expect(await screen.findByRole("button", { name: "Low-confidence risk accepted" })).toBeInTheDocument();
   });
 
   it("starts regeneration from the low-confidence warning and opens the new run", async () => {
@@ -914,8 +937,8 @@ describe("RunView T10 states", () => {
         </Routes>
       </MemoryRouter>,
     );
-    fireEvent.click(screen.getByRole("button", { name: "查看低置信度警告" }));
-    fireEvent.click(screen.getByRole("button", { name: "重新出具" }));
+    fireEvent.click(screen.getByRole("button", { name: "View low-confidence warning" }));
+    fireEvent.click(screen.getByRole("button", { name: "Regenerate report" }));
 
     await waitFor(() => expect(api.regenerateRun).toHaveBeenCalledWith("r1"));
   });

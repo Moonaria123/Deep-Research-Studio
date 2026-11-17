@@ -24,7 +24,7 @@ function testLabel(test: TestState): string {
   const host = test.endpoint_host ? ` · ${test.endpoint_host}` : "";
   const missing =
     "missing_required" in test && test.missing_required?.length
-      ? ` · 缺少 ${test.missing_required.join(", ")}`
+      ? ` · Missing ${test.missing_required.join(", ")}`
       : "";
   const detail =
     "error_message" in test && test.error_message?.trim() ? ` · ${test.error_message.trim()}` : "";
@@ -91,7 +91,7 @@ export function ProviderTable({
                 <TD className="text-center text-text-muted">
                   {p.models.length}
                   {p.models.length === 0 && p.type !== "ollama" && (
-                    <div className="mt-0.5 text-[10px] text-danger">需添加模型</div>
+                    <div className="mt-0.5 text-[10px] text-danger">Add a model</div>
                   )}
                 </TD>
                 <TD className="text-center">

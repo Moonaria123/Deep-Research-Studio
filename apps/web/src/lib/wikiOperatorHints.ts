@@ -22,26 +22,26 @@ export function wikiErrorCodeHint(errorCode?: string | null): WikiOperatorHint |
   const code = String(errorCode || "").trim().toUpperCase();
   if (code === "PROVIDER_NOT_CONFIGURED") {
     return {
-      title: "Memory 模型未配置",
-      detail: "到 Settings 的 Memory 角色绑定可用模型，运行 Test memory format 后再 Refresh Wiki。",
+      title: "Memory model is not configured",
+      detail: "Assign an available model to the Memory role in Settings, run Test memory format, then select Refresh Wiki.",
     };
   }
   if (code === "WIKI_LLM_FAILED") {
     return {
-      title: "Wiki 模型调用失败",
-      detail: "检查 Memory 模型的网络、配额和密钥状态；若仍显示 attempts=0，请查看刷新 job 的诊断摘要。",
+      title: "Wiki model call failed",
+      detail: "Check the Memory model's connection, quota, and API key. If attempts=0 still appears, check the refresh job's diagnostic summary.",
     };
   }
   if (code === "NO_WIKI_TOPICS") {
     return {
-      title: "没有生成可激活的 Wiki topics",
-      detail: "确认当前图谱包含有 assistant 输出的 Session；若所有 Session 都失败，先修复上游模型调用。",
+      title: "No Wiki topics are ready to activate",
+      detail: "Make sure the current graph contains Sessions with assistant responses. If all Sessions failed, resolve the model call failures first.",
     };
   }
   if (code === "INVALID_EVIDENCE_REF") {
     return {
-      title: "Evidence 引用不合法",
-      detail: "这是旧快照常见错误；请在当前版本重新 Refresh Wiki，让系统用新的 evidence allowlist 生成。",
+      title: "Invalid evidence reference",
+      detail: "This can occur with older snapshots. Select Refresh Wiki in the current version to regenerate topics using the updated set of allowed evidence.",
     };
   }
   return null;

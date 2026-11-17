@@ -210,13 +210,13 @@ export function SessionThread() {
         <Card data-anim className="border-danger/40">
           <CardContent className="space-y-3 pt-5">
             <p role="alert" className="text-sm text-danger">
-              该会话已归档，内容已锁定。请先在已归档会话中恢复后再继续提问。
+              This session is archived and its content is locked. Restore it from Archived sessions before asking another question.
             </p>
             <Link
               to="/history/archived"
               className="inline-flex h-8 items-center rounded-md border border-border bg-surface px-3 text-sm text-text hover:bg-bg-subtle focus-ring"
             >
-              前往已归档会话
+              Go to archived sessions
             </Link>
           </CardContent>
         </Card>
@@ -260,7 +260,7 @@ export function SessionThread() {
                         onClick={() => openRunInPanel(meta.run_id!)}
                         className="inline-flex items-center gap-1 rounded text-sm text-accent hover:underline focus-ring"
                       >
-                        <FileText className="h-4 w-4" /> {truncated ? "查看完整报告" : "查看运行详情"}
+                        <FileText className="h-4 w-4" /> {truncated ? "View full report" : "View run details"}
                       </button>
                     )}
                   </CardContent>

@@ -5,6 +5,9 @@
 html[data-demo="true"] input[type="password"],
 html[data-demo="true"] input[type="file"] {
   pointer-events: none;
+}
+
+html[data-demo="true"] input[type="password"] {
   opacity: 0.55;
 }
 

@@ -907,8 +907,8 @@ describe("Graph", () => {
     expect(screen.getAllByText("Wiki partial")).toHaveLength(2);
     expect(screen.getByLabelText("Wiki partial details")).toHaveTextContent("6 / 15 Sessions succeeded");
     expect(screen.getByText("Dominant error: INVALID_EVIDENCE_REF (12)")).toBeInTheDocument();
-    expect(screen.getByText("Evidence 引用不合法")).toBeInTheDocument();
-    expect(screen.getByText("这是旧快照常见错误；请在当前版本重新 Refresh Wiki，让系统用新的 evidence allowlist 生成。")).toBeInTheDocument();
+    expect(screen.getByText("Invalid evidence reference")).toBeInTheDocument();
+    expect(screen.getByText("This can occur with older snapshots. Select Refresh Wiki in the current version to regenerate topics using the updated set of allowed evidence.")).toBeInTheDocument();
     expect(screen.getByText("2 dropped refs · 1 dropped topics")).toBeInTheDocument();
     expect(screen.getByText("sess-failed: INVALID_EVIDENCE_REF · INVALID_EVIDENCE_REF · json_schema_strict")).toBeInTheDocument();
     expect(screen.queryByText("req-hidden")).not.toBeInTheDocument();
@@ -922,8 +922,8 @@ describe("Graph", () => {
     await screen.findByRole("button", { name: "AI safety" });
 
     expect(screen.getByLabelText("Wiki refresh failed")).toHaveTextContent("PROVIDER_NOT_CONFIGURED");
-    expect(screen.getByLabelText("Wiki refresh failed")).toHaveTextContent("Memory 模型未配置");
-    expect(screen.getByText("到 Settings 的 Memory 角色绑定可用模型，运行 Test memory format 后再 Refresh Wiki。")).toBeInTheDocument();
+    expect(screen.getByLabelText("Wiki refresh failed")).toHaveTextContent("Memory model is not configured");
+    expect(screen.getByText("Assign an available model to the Memory role in Settings, run Test memory format, then select Refresh Wiki.")).toBeInTheDocument();
     expect(screen.queryByText("RAW_PROVIDER_ERROR_SHOULD_NOT_RENDER")).not.toBeInTheDocument();
     expect(screen.queryByText("req-hidden")).not.toBeInTheDocument();
     expect(screen.queryByText("RAW_PROMPT_SHOULD_NOT_RENDER")).not.toBeInTheDocument();

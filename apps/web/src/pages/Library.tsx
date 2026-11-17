@@ -20,6 +20,7 @@ import { useGsapEntrance } from "@/hooks/useGsapEntrance";
 import { IS_DEMO } from "@/lib/runtime";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input, Textarea } from "@/components/ui/input";
+import { FileInput } from "@/components/ui/file-input";
 import { Button } from "@/components/ui/button";
 
 type Tab = "sources" | "notes" | "reports";
@@ -83,6 +84,7 @@ export function Library() {
   const [snapshotPreview, setSnapshotPreview] = useState<PageSnapshot>();
   const [selectedReport, setSelectedReport] = useState<LibraryReport>();
   const documentInputRef = useRef<HTMLInputElement>(null);
+  const reportInputRef = useRef<HTMLInputElement>(null);
   const deepLinkApplied = useRef({ note: "", report: "", source: "" });
   const ref = useGsapEntrance<HTMLDivElement>([tab, docs.length, notes.length, reports.length]);
 
@@ -241,6 +243,7 @@ export function Library() {
     try {
       await api.uploadLibraryReport(uploadFile, uploadTitle.trim());
       setUploadFile(null);
+      if (reportInputRef.current) reportInputRef.current.value = "";
       setUploadTitle("");
       await loadReports();
     } catch (e) {
@@ -366,10 +369,10 @@ export function Library() {
             <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,220px)_auto] sm:items-end">
               <label className="grid min-w-0 gap-1 text-xs font-medium text-text-muted">
                 Local document
-                <Input
+                <FileInput
                   aria-label="Local document file"
                   ref={documentInputRef}
-                  type="file"
+                  fileName={documentFile?.name}
                   accept=".pdf,.docx,.xlsx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                   onChange={(event) => setDocumentFile(event.target.files?.[0] ?? null)}
                   disabled={IS_DEMO || importingDocument}
@@ -573,9 +576,10 @@ export function Library() {
                   placeholder="Report title"
                   disabled={IS_DEMO}
                 />
-                <Input
+                <FileInput
                   aria-label="Report file"
-                  type="file"
+                  ref={reportInputRef}
+                  fileName={uploadFile?.name}
                   accept=".md,.txt,text/markdown,text/plain"
                   onChange={(e) => setUploadFile(e.target.files?.[0] ?? null)}
                   disabled={IS_DEMO}

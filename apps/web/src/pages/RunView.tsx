@@ -26,6 +26,7 @@ import { MultipleLanesPanel } from "@/components/MultipleLanesPanel";
 import { CouncilMatrixTables } from "@/components/CouncilMatrixTables";
 import { CouncilReportHeader } from "@/components/CouncilReportHeader";
 import { parseCouncilSections } from "@/lib/parseCouncilSections";
+import { temporalCoverageCopy } from "@/lib/temporalCoverageCopy";
 import { ProgressTimeline } from "@/components/ProgressTimeline";
 import { ConfidenceMeter } from "@/components/ConfidenceMeter";
 import { ConfidenceTag } from "@/components/ConfidenceTag";
@@ -53,20 +54,20 @@ const UNVERIFIED_REASON_COPY: Record<string, string> = {
 };
 
 const CONFIDENCE_WARNING_COPY: Record<string, string> = {
-  evidence_insufficient: "部分内容尚缺乏充分证据支持。",
-  verification_incomplete: "部分内容未能完成核验。",
-  verification_interrupted: "核验流程未完整结束。",
-  source_conflict: "不同来源之间仍存在冲突。",
-  unsupported_claim: "部分结论未获得现有证据支持。",
-  coverage_below_threshold: "部分结论的证据覆盖不足。",
-  zero_citable_evidence: "当前报告缺少可核查的引用来源。",
-  invalid_citation_binding: "部分结论与引用来源的对应关系需要人工核查。",
-  council_member_fallback: "模型委员会未形成完整共识，报告采用了可用成员结果。",
-  output_shape_invalid: "报告结构未完全符合预期，关键内容需要核查。",
-  unknown_only: "现有证据尚不足以确认部分结论。",
+  evidence_insufficient: "Some content lacks sufficient evidence.",
+  verification_incomplete: "Verification could not be completed for some content.",
+  verification_interrupted: "The verification process did not finish.",
+  source_conflict: "Conflicts between sources remain unresolved.",
+  unsupported_claim: "Some conclusions are not supported by the available evidence.",
+  coverage_below_threshold: "Some conclusions have insufficient evidence coverage.",
+  zero_citable_evidence: "This report lacks verifiable cited sources.",
+  invalid_citation_binding: "The links between some conclusions and their cited sources need manual review.",
+  council_member_fallback: "The model council did not reach full consensus. The report uses the available member results.",
+  output_shape_invalid: "The report structure differs from the expected format. Please review the key content.",
+  unknown_only: "The available evidence is not yet sufficient to confirm some conclusions.",
 };
 
-const UNKNOWN_CONFIDENCE_WARNING = "部分内容尚缺乏充分证据支持，请核查关键结论。";
+const UNKNOWN_CONFIDENCE_WARNING = "Some content lacks sufficient evidence. Please verify the key conclusions.";
 
 function ConfidenceVerificationStatus({
   result,
@@ -80,9 +81,9 @@ function ConfidenceVerificationStatus({
   const verificationStatus = result.verification?.status;
   if (verificationStatus === "pending" || verificationStatus === "running") {
     return (
-      <div className="mt-3 flex items-center gap-2 border-t border-border pt-3 text-sm text-text-muted" role="status" aria-label="正在核验报告">
+      <div className="mt-3 flex items-center gap-2 border-t border-border pt-3 text-sm text-text-muted" role="status" aria-label="Verifying report">
         <LoaderCircle className="h-4 w-4 animate-spin text-accent" aria-hidden="true" />
-        <span>正在核验报告置信度…</span>
+        <span>Verifying report confidence…</span>
       </div>
     );
   }
@@ -94,19 +95,19 @@ function ConfidenceVerificationStatus({
   const label = verificationStatus === "failed" ? "uncertain" : result.answer.confidence_label;
 
   return (
-    <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-border pt-3" aria-label="报告置信度">
-      <span className="text-xs text-text-faint">置信度</span>
+    <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-border pt-3" aria-label="Report confidence">
+      <span className="text-xs text-text-faint">Confidence</span>
       {label ? <ConfidenceTag label={label} /> : result.confidence != null ? (
         <Badge>{Math.round(result.confidence * 100)}%</Badge>
       ) : (
-        <Badge>待评估</Badge>
+        <Badge>Awaiting assessment</Badge>
       )}
       {lowConfidence ? (
         <button
           type="button"
           onClick={onWarningClick}
-          aria-label={acknowledged ? "低置信度风险已确认" : "查看低置信度警告"}
-          title={acknowledged ? "已确认并接受低置信度风险" : "查看低置信度警告"}
+          aria-label={acknowledged ? "Low-confidence risk accepted" : "View low-confidence warning"}
+          title={acknowledged ? "You have acknowledged and accepted the low-confidence risk" : "View low-confidence warning"}
           className={acknowledged
             ? "inline-flex h-6 w-6 items-center justify-center rounded-full bg-surface-muted text-text-faint focus-ring"
             : "inline-flex h-6 w-6 items-center justify-center rounded-full bg-danger text-white focus-ring"}
@@ -172,8 +173,8 @@ function TemporalScopeNotice({ coverage }: { coverage?: TemporalCoverage }) {
   if (!coverage?.statement?.trim()) return null;
   return (
     <div className="rounded-lg border border-border bg-bg-subtle p-4" role="note" aria-label="Temporal scope">
-      <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-text-muted">正文时效范围声明</p>
-      <p className="text-sm leading-6 text-text-body">{coverage.statement}</p>
+      <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-text-muted">Temporal scope</p>
+      <p className="text-sm leading-6 text-text-body">{temporalCoverageCopy(coverage.statement)}</p>
     </div>
   );
 }
@@ -188,21 +189,21 @@ function RunDisclosures({
   return (
     <>
       {answer.conflicts?.length ? (
-        <aside className="rounded-lg border border-warning/50 bg-warning/10 p-4" aria-label="证据冲突附注">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-text-muted">证据冲突附注</p>
+        <aside className="rounded-lg border border-warning/50 bg-warning/10 p-4" aria-label="Evidence conflict notes">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-text-muted">Evidence conflict notes</p>
           <ul className="space-y-2 text-sm leading-6 text-text-body">
             {answer.conflicts.map((conflict) => (
               <li key={conflict.id}>
-                <span className="font-medium">{conflict.claim}</span>：{conflict.reason}
+                <span className="font-medium">{conflict.claim}</span>: {conflict.reason}
               </li>
             ))}
           </ul>
         </aside>
       ) : null}
       {temporalCoverage?.note_required ? (
-        <aside className="rounded-lg border border-warning/50 bg-warning/10 p-4" aria-label="时效性附注">
-          <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-text-muted">时效性附注</p>
-          <p className="text-sm leading-6 text-text-body">{temporalCoverage.statement}</p>
+        <aside className="rounded-lg border border-warning/50 bg-warning/10 p-4" aria-label="Freshness notes">
+          <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-text-muted">Freshness notes</p>
+          <p className="text-sm leading-6 text-text-body">{temporalCoverageCopy(temporalCoverage.statement)}</p>
           {temporalCoverage.reason_codes.length ? (
             <p className="mt-1 text-xs text-text-faint">{temporalCoverage.reason_codes.join(" · ")}</p>
           ) : null}
@@ -621,7 +622,7 @@ export function RunPanel({
     { eligible: 0, rejected: 0, unknown: 0 },
   );
   const errorMessage = archived
-    ? "该会话已归档，内容已锁定。请先在已归档会话中恢复后再查看。"
+    ? "This session is archived and its content is locked. Restore it from Archived sessions to view it."
     : errorCode && T10_ERROR_COPY[errorCode]
       ? T10_ERROR_COPY[errorCode]
       : (error ?? "The run failed.");
@@ -723,7 +724,7 @@ export function RunPanel({
       setConfidenceAcknowledged(true);
       setConfidenceDialogOpen(false);
     } catch (actionError) {
-      setConfidenceActionError(actionError instanceof ApiError ? actionError.message : "确认失败，请重试。");
+      setConfidenceActionError(actionError instanceof ApiError ? actionError.message : "Could not acknowledge the warning. Please try again.");
     } finally {
       setConfidenceAction(undefined);
     }
@@ -738,7 +739,7 @@ export function RunPanel({
       setConfidenceDialogOpen(false);
       navigate(`/run/${regenerated.run_id}`);
     } catch (actionError) {
-      setConfidenceActionError(actionError instanceof ApiError ? actionError.message : "重新出具失败，请重试。");
+      setConfidenceActionError(actionError instanceof ApiError ? actionError.message : "Could not regenerate the report. Please try again.");
     } finally {
       setConfidenceAction(undefined);
     }
@@ -763,14 +764,14 @@ export function RunPanel({
       />
 
       {verificationStatus === "completed" ? (
-        <div className="mt-4 flex items-start gap-2 rounded-md border border-border bg-bg-subtle px-3 py-2 text-sm text-text-body" role="status" aria-label="核验完成">
+        <div className="mt-4 flex items-start gap-2 rounded-md border border-border bg-bg-subtle px-3 py-2 text-sm text-text-body" role="status" aria-label="Verification complete">
           <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-success" aria-hidden="true" />
-          <span>报告核验已完成，置信度信息已更新。</span>
+          <span>Verification complete. Confidence information has been updated.</span>
         </div>
       ) : verificationStatus === "failed" ? (
-        <div className="mt-4 flex items-start gap-2 rounded-md border border-warning/50 bg-warning/10 px-3 py-2 text-sm text-text-body" role="status" aria-label="核验未完成">
+        <div className="mt-4 flex items-start gap-2 rounded-md border border-warning/50 bg-warning/10 px-3 py-2 text-sm text-text-body" role="status" aria-label="Verification incomplete">
           <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-warning" aria-hidden="true" />
-          <span>报告已出具，但核验未能完成。请核查来源或重新出具。</span>
+          <span>The report is available, but verification could not be completed. Review the sources or regenerate the report.</span>
         </div>
       ) : null}
 
@@ -896,7 +897,7 @@ export function RunPanel({
                     to="/history/archived"
                     className="inline-flex h-8 items-center rounded-md border border-border bg-surface px-3 text-sm text-text hover:bg-bg-subtle focus-ring"
                   >
-                    前往已归档会话
+                    Go to archived sessions
                   </Link>
                 )}
               </CardContent>
@@ -1040,15 +1041,15 @@ export function RunPanel({
       <Dialog
         open={confidenceDialogOpen}
         onOpenChange={setConfidenceDialogOpen}
-        title="低置信度警告"
-        description="当前报告已正常出具，但部分结论的证据支持或核验结果有限。"
+        title="Low-confidence warning"
+        description="The report is available, but some conclusions have limited evidence or incomplete verification."
       >
         <div className="space-y-4">
           <p className="text-sm text-text-muted">
-            建议先核查关键来源，或使用当前已有证据并重新搜索补充证据后重新出具报告。
+            Review the key sources, or regenerate the report using the existing evidence and a new search for additional evidence.
           </p>
           {result?.confidence_warning?.reasons.length ? (
-            <ul className="list-disc space-y-1 pl-5 text-xs text-text-faint" aria-label="低置信度原因">
+            <ul className="list-disc space-y-1 pl-5 text-xs text-text-faint" aria-label="Reasons for low confidence">
               {result.confidence_warning.reasons.map((reason) => (
                 <li key={reason}>{CONFIDENCE_WARNING_COPY[reason] ?? UNKNOWN_CONFIDENCE_WARNING}</li>
               ))}
@@ -1062,14 +1063,14 @@ export function RunPanel({
               onClick={() => void handleAcknowledgeConfidence()}
               disabled={Boolean(confidenceAction)}
             >
-              {confidenceAction === "acknowledge" ? "确认中…" : "确认并忽略"}
+              {confidenceAction === "acknowledge" ? "Accepting…" : "Accept and dismiss"}
             </Button>
             <Button
               type="button"
               onClick={() => void handleRegenerate()}
               disabled={Boolean(confidenceAction)}
             >
-              {confidenceAction === "regenerate" ? "重新出具中…" : "重新出具"}
+              {confidenceAction === "regenerate" ? "Regenerating…" : "Regenerate report"}
             </Button>
           </div>
         </div>

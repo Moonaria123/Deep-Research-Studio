@@ -50,7 +50,7 @@ export function RunHeader({
           </Button>
           {sessionId && (
             <Button variant="ghost" size="sm" onClick={() => navigate(`/session/${sessionId}`)}>
-              <CornerDownRight className="h-4 w-4" /> 返回会话
+              <CornerDownRight className="h-4 w-4" /> Back to session
             </Button>
           )}
         </div>
