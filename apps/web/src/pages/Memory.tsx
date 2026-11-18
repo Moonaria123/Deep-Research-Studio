@@ -223,6 +223,17 @@ function SourceSessionLink({ href, memoryId }: { href: string; memoryId: string 
   );
 }
 
+function MemoryModelSettingsLink() {
+  const inRouter = useInRouterContext();
+  const className = "mb-2 inline-flex items-center gap-1 text-xs font-medium text-accent hover:underline focus-ring";
+  const content = <><Settings className="h-3.5 w-3.5" /> Set memory processing model</>;
+  return inRouter ? (
+    <Link to="/settings" className={className}>{content}</Link>
+  ) : (
+    <a href="/settings" className={className}>{content}</a>
+  );
+}
+
 function userProfileSections(memory: MemoryItem): UserProfileSection[] {
   const raw = memory.metadata?.sections;
   if (!Array.isArray(raw)) return [];
@@ -1224,12 +1235,7 @@ export function Memory() {
                   </div>
                 </div>
                 {!memoryRoleConfigured && group.suggestions.some((suggestion) => suggestion.type === "merge") ? (
-                  <a
-                    href="/settings"
-                    className="mb-2 inline-flex items-center gap-1 text-xs font-medium text-accent hover:underline focus-ring"
-                  >
-                    <Settings className="h-3.5 w-3.5" /> Set memory processing model
-                  </a>
+                  <MemoryModelSettingsLink />
                 ) : null}
                 <p className="mb-2 text-sm text-text-body">{group.suggested_summary}</p>
                 <ul className="space-y-1">

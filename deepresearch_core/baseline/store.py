@@ -1729,6 +1729,25 @@ class Store:
                     data[key] = _safe_json(data[key])
         return data
 
+    def list_runs_by_statuses(self, statuses: Iterable[str]) -> list[JsonDict]:
+        """Return runs in the requested states for bounded lifecycle reconciliation."""
+
+        selected = tuple(dict.fromkeys(str(status) for status in statuses if str(status)))
+        if not selected:
+            return []
+        placeholders = ",".join("?" for _ in selected)
+        with self._lock:
+            rows = self._conn.execute(
+                f"SELECT * FROM runs WHERE status IN ({placeholders}) ORDER BY created_at, id",
+                selected,
+            ).fetchall()
+        results: list[JsonDict] = []
+        for row in rows:
+            item = self.get_run(str(row["id"]))
+            if item is not None:
+                results.append(item)
+        return results
+
     def append_event(self, run_id: str, event_type: str, payload: JsonDict) -> int:
         """Append an SSE-style run event; returns its sequence number."""
 
@@ -3733,6 +3752,16 @@ class Store:
             (run_id,),
         ).fetchone()
         return _row_to_dict(row)
+
+    def list_active_post_turn_memory_runs(self) -> list[JsonDict]:
+        """Return post-turn Memory audits left in a nonterminal worker state."""
+
+        with self._lock:
+            rows = self._conn.execute(
+                "SELECT * FROM post_turn_memory_runs WHERE status IN ('queued','running') "
+                "ORDER BY checked_at, run_id"
+            ).fetchall()
+        return [_row_to_dict(row) for row in rows]
 
     def fail_post_turn_memory_run(
         self, *, run_id: str, session_id: str, error_code: str

@@ -5229,6 +5229,7 @@ class BaselineService:
                 artifact_id=document_id,
             ),
         ]
+        rows = [row for row in rows if row.get("run_id") or row.get("session_id")]
         rows.sort(key=lambda item: float(item.get("created_at") or 0), reverse=True)
         return {"artifacts": rows}
 

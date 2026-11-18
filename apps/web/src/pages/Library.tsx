@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   ExternalLink,
   FileText,
@@ -17,7 +17,7 @@ import { libraryPathForTab, libraryTabFromPath } from "@/lib/libraryRoutes";
 import type { LibraryDocument, LibraryProvenance, LibraryReport, Note, PageSnapshot } from "@/lib/types";
 import { cn, domainOf, formatTime } from "@/lib/utils";
 import { useGsapEntrance } from "@/hooks/useGsapEntrance";
-import { IS_DEMO } from "@/lib/runtime";
+import { EXTERNAL_LINK_TARGET, IS_DEMO } from "@/lib/runtime";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input, Textarea } from "@/components/ui/input";
 import { FileInput } from "@/components/ui/file-input";
@@ -87,6 +87,7 @@ export function Library() {
   const reportInputRef = useRef<HTMLInputElement>(null);
   const deepLinkApplied = useRef({ note: "", report: "", source: "" });
   const ref = useGsapEntrance<HTMLDivElement>([tab, docs.length, notes.length, reports.length]);
+  const linkedSourceSessions = sourceSessions.filter((item) => Boolean(artifactHref(item)));
 
   const fail = (e: unknown) => setError(e instanceof ApiError ? e.message : (e as Error).message);
 
@@ -464,14 +465,19 @@ export function Library() {
                         <div className="mt-3 border-t border-border pt-3 text-sm">
                           <div className="mb-2 flex flex-wrap items-center gap-3 text-xs text-text-muted">
                             {isExternalSource(d) && d.url ? (
-                              <a className="inline-flex items-center gap-1 text-accent" href={d.url}>
+                              <a
+                                className="inline-flex items-center gap-1 text-accent"
+                                href={d.url}
+                                target={EXTERNAL_LINK_TARGET}
+                                rel="noreferrer noopener"
+                              >
                                 <ExternalLink className="h-3.5 w-3.5" /> Open latest web page
                               </a>
                             ) : (
                               <span>Local evidence document</span>
                             )}
                             <span>{sourceSnapshots.length} snapshots</span>
-                            <span>{sourceSessions.length} linked runs</span>
+                            <span>Research links: {linkedSourceSessions.length}</span>
                           </div>
                           {snapshotPreview?.text ? (
                             <pre className="max-h-56 overflow-auto whitespace-pre-wrap rounded-md bg-bg-subtle p-3 text-xs text-text-body">
@@ -484,17 +490,17 @@ export function Library() {
                           ) : (
                             <p className="text-xs text-text-muted">No local snapshot preview yet.</p>
                           )}
-                          {sourceSessions.length > 0 && (
+                          {linkedSourceSessions.length > 0 && (
                             <div className="mt-3 flex flex-wrap gap-2">
-                              {sourceSessions.map((item, index) => (
-                                <a
+                              {linkedSourceSessions.map((item, index) => (
+                                <Link
                                   key={`${item.session_id}-${item.run_id}-${index}`}
                                   className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1 text-xs text-text-body hover:bg-bg-subtle"
-                                  href={item.run_id ? `/run/${item.run_id}` : `/session/${item.session_id}`}
+                                  to={artifactHref(item)}
                                 >
                                   <History className="h-3.5 w-3.5" />
                                   {item.run_id || item.session_id}
-                                </a>
+                                </Link>
                               ))}
                             </div>
                           )}
@@ -544,13 +550,13 @@ export function Library() {
                           </span>
                           {n.created_at && <span className="text-xs text-text-faint">{formatTime(n.created_at)}</span>}
                           {artifactHref(n) && (
-                            <a
+                            <Link
                               className="inline-flex items-center gap-1 text-xs text-accent"
-                              href={artifactHref(n)}
+                              to={artifactHref(n)!}
                             >
                               <History className="h-3.5 w-3.5" />
                               {n.run_id || n.session_id}
-                            </a>
+                            </Link>
                           )}
                         </div>
                         <p className="whitespace-pre-wrap text-sm text-text-body">{n.content}</p>
@@ -628,10 +634,10 @@ export function Library() {
                     {artifactHref(selectedReport) ? (
                       <>
                         {" - "}
-                        <a className="inline-flex items-center gap-1 text-accent" href={artifactHref(selectedReport)}>
+                        <Link className="inline-flex items-center gap-1 text-accent" to={artifactHref(selectedReport)!}>
                           <History className="h-3.5 w-3.5" />
                           {selectedReport.run_id || selectedReport.session_id}
-                        </a>
+                        </Link>
                       </>
                     ) : null}
                   </p>

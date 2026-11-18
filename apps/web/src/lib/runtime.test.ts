@@ -13,3 +13,13 @@ describe("demo runtime", () => {
     vi.unstubAllEnvs();
   });
 });
+
+describe("route strategy", () => {
+  it("uses reload-safe hash routing only for packaged/static runtimes", async () => {
+    const { usesHashRouting } = await import("./runtime");
+    expect(usesHashRouting("desktop")).toBe(true);
+    expect(usesHashRouting("demo")).toBe(true);
+    expect(usesHashRouting("production")).toBe(false);
+    expect(usesHashRouting("development")).toBe(false);
+  });
+});

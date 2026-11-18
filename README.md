@@ -190,6 +190,9 @@ Please report suspected vulnerabilities through the process in [SECURITY.md](SEC
 
 ## Roadmap
 
+The Windows client is being developed separately from the Web release. See the
+[Windows development guide](docs/windows-client.md) for builds and validation scope.
+
 ### Gen1 maintenance
 
 - continue hardening source attribution, confidence explanations, and research recovery;

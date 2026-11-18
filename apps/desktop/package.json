@@ -1,0 +1,15 @@
+{
+  "name": "deep-research-studio-desktop",
+  "private": true,
+  "version": "1.1.0-alpha.3",
+  "description": "Windows desktop client for Deep Research Studio Gen1.",
+  "scripts": {
+    "dev": "tauri dev",
+    "build": "tauri build",
+    "icons": "tauri icon src-tauri/icons/icon.png",
+    "tauri": "tauri"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "2.12.5"
+  }
+}

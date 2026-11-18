@@ -24,6 +24,11 @@ describe("AnswerBody", () => {
     expect(screen.queryByRole("link")).toBeNull();
   });
 
+  it("uses the runtime external-link target for markdown links", () => {
+    render(<AnswerBody text="[Primary source](https://example.com/source)" citations={[]} />);
+    expect(screen.getByRole("link", { name: "Primary source" })).toHaveAttribute("target", "_blank");
+  });
+
   it("falls back to the marker id as title when the citation is missing", () => {
     render(<AnswerBody text="Unknown [c9] ref." citations={citations} />);
     expect(screen.getByRole("link", { name: "9" })).toHaveAttribute("title", "c9");

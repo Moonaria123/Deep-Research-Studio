@@ -192,7 +192,9 @@ class SearchClient:
             sleeper=self.sleeper,
         )
         body = data.get("data", data) if isinstance(data, dict) else {}
-        raw_results = body.get("web", []) if isinstance(body, dict) else []
+        raw_results = body.get("web") if isinstance(body, dict) else body
+        if not isinstance(raw_results, list):
+            return []
         normalized = []
         for index, item in enumerate(raw_results):
             if not isinstance(item, dict):

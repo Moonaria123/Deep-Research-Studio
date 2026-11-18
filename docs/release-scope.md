@@ -1,5 +1,9 @@
 # v1.0.0 release scope
 
+This document describes the published Web release. The subsequent Windows
+development branch adds a desktop client described in [the Windows guide](windows-client.md);
+that client is not included in the `v1.0.0` release assets.
+
 v1.0.0 is the initial release of this repository under the PolyForm Noncommercial License 1.0.0. It preserves the current Gen1 Web feature set. See [licensing](licensing.md) for permitted uses, commercial permission and mandatory original-author notices.
 
 This repository contains the first-generation Web application and the backend services it needs. It starts from the T59-based Gen1 release branch, including the subsequent report-confidence, background verification, Memory queue, and semantic-recall fixes.

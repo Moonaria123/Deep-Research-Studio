@@ -4,6 +4,7 @@ import { Link, useInRouterContext } from "react-router-dom";
 import type { EvidenceSource } from "@/lib/types";
 import { domainOf } from "@/lib/utils";
 import { evidenceArtifactLabel, evidenceHref } from "@/lib/evidenceRoutes";
+import { EXTERNAL_LINK_TARGET } from "@/lib/runtime";
 import { Badge } from "@/components/ui/badge";
 
 export function SourceCard({
@@ -52,8 +53,8 @@ export function SourceCard({
             target.external || !inRouter ? (
               <a
                 href={target.href}
-                target={target.external ? "_blank" : undefined}
-                rel={target.external ? "noreferrer" : undefined}
+                target={target.external ? EXTERNAL_LINK_TARGET : undefined}
+                rel={target.external ? "noreferrer noopener" : undefined}
                 className={linkClass}
               >
                 <span className="truncate">{title}</span>

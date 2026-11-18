@@ -185,10 +185,13 @@ def parse_local_document(
             except OSError:
                 pass
             raise
+        worker_entry = (
+            [sys.executable, "--document-worker"]
+            if getattr(sys, "frozen", False)
+            else [sys.executable, "-m", "deepresearch_core.baseline.local_document_import"]
+        )
         command = [
-            sys.executable,
-            "-m",
-            "deepresearch_core.baseline.local_document_import",
+            *worker_entry,
             "--worker",
             str(source),
             "--kind",
@@ -200,6 +203,9 @@ def parse_local_document(
                 command,
                 cwd=str(Path(__file__).resolve().parents[2]),
                 env=environment,
+                # The desktop's stdin is a live parent-lifetime pipe. A parser
+                # must neither inherit that pipe nor keep it open on Windows.
+                stdin=subprocess.DEVNULL,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.DEVNULL,
                 text=True,
@@ -366,7 +372,12 @@ def _minimal_subprocess_environment() -> dict[str, str]:
     environment = {key: value for key, value in os.environ.items() if key.upper() in allowed}
     environment["PYTHONIOENCODING"] = "utf-8"
     environment["PYTHONWARNINGS"] = "ignore"
-    environment["PYTHONPATH"] = os.pathsep.join(str(item) for item in sys.path if item)
+    if getattr(sys, "frozen", False):
+        # Reuse the parent's onefile extraction for the short-lived parser. Never
+        # forward provider variables, but preserve PyInstaller's runtime identity.
+        environment.update({key: value for key, value in os.environ.items() if key.startswith("_PYI_")})
+    else:
+        environment["PYTHONPATH"] = os.pathsep.join(str(item) for item in sys.path if item)
     return environment
 
 

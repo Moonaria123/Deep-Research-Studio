@@ -533,7 +533,10 @@ def _valid_named_search_payload(provider_id: str, payload: dict[str, Any] | None
         return isinstance(web, dict) and isinstance(web.get("results"), list)
     if provider_id in {"tavily", "exa"}:
         return isinstance(payload.get("results"), list)
-    return payload.get("success") is True and isinstance(payload.get("data"), list)
+    data = payload.get("data")
+    return payload.get("success") is True and (
+        isinstance(data, list) or (isinstance(data, dict) and isinstance(data.get("web"), list))
+    )
 
 
 def _json_mapping(body: bytes) -> dict[str, Any] | None:

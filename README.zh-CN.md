@@ -190,6 +190,9 @@ Web 客户端连接本地 API。Redis 协调研究和语义 Worker；报告、�
 
 ## 路线图
 
+Windows 客户端在 Web 发布基线后的独立分支开发。构建方式与验收边界见
+[Windows 客户端开发说明](docs/windows-client.md)。
+
 ### 第一代维护
 
 - 继续加强来源归属、置信度说明和研究恢复；

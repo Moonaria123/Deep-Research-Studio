@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:desktop": "tsc -b && vite build --mode desktop --outDir dist-desktop",
     "build:demo": "tsc -b && vite build --mode demo --outDir dist-demo",
     "preview": "vite preview",
     "lint": "tsc --noEmit",

@@ -18,6 +18,14 @@ from deepresearch_core.standalone.llm import ProviderRequestError
 from deepresearch_core.standalone.search import SearchClient, SearchSettings
 
 
+def test_firecrawl_search_accepts_legacy_list_from_configured_endpoint() -> None:
+    client = SearchClient(
+        SearchSettings(firecrawl_api_key="fc-test"),
+        transport=lambda request: {"success": True, "data": [{"url": "https://example.com/doc"}]},
+    )
+    assert [hit["url"] for hit in client.firecrawl_search("sample")] == ["https://example.com/doc"]
+
+
 def test_firecrawl_search_uses_v2_endpoint_and_normalizes_hits() -> None:
     seen: dict[str, object] = {}
 
