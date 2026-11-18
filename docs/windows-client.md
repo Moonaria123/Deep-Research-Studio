@@ -11,10 +11,16 @@ documents the preceding build.
 
 ## Install and use
 
-Run the `Deep Research Studio_1.1.0-alpha.3_x64-setup.exe` NSIS installer. It
-installs for the current Windows user. Python, Docker and Redis are not required
-on the destination machine. Microsoft WebView2 is required; Tauri's installer
-bootstrapper is configured to download it if missing, requiring an Internet connection.
+Double-click `Deep Research Studio_1.1.0-alpha.3_x64-setup.exe` from the Windows
+account that will use the app. A standard account can complete the installation.
+When WebView2 has no registered version, keep the computer online so the installer
+can download Microsoft's bootstrapper. In our standard-user test, it installed a
+new runtime in the user's profile. An elevated Sandbox session failed during the
+Microsoft update step. If you encounter that failure after choosing **Run as
+administrator**, reopen the installer normally. [Installer test results](qa/windows-installer-acceptance-20261118.md#online-webview2-bootstrap)
+
+The client includes its local API and requires WebView2. Python, Docker and Redis
+are unnecessary on the destination machine.
 If the registered version is unavailable, the client looks for a machine-installed
 Evergreen runtime and checks the Microsoft signatures on its browser and loader
 before using it. This development installer is unsigned.
@@ -103,6 +109,10 @@ exact installers used for native UI and live-provider tests. It also records
 the failed attempts and the citation coverage displayed for each real report.
 
 ## 简体中文
+
+从日常使用的 Windows 账户双击安装包。如果系统没有注册 WebView2，请保持联网，
+安装程序会下载微软引导程序。普通账户已经实测可以完成安装；若从提升权限的会话启动时
+遇到 WebView2 安装错误，请返回普通桌面重新打开安装包。
 
 本分支在已公开的第一代 Web 基线上新增 Windows x64 客户端，采用 Tauri 2 与随安装包
 携带的本地 API。终端用户无需安装 Python、Docker 或 Redis。界面仍为英文，首次启动后

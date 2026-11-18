@@ -3,7 +3,7 @@
 ## Scope and isolation
 
 - Candidate: `Deep Research Studio 1.1.0-alpha.3` NSIS x64 installer.
-- Clean-machine coverage used Windows Sandbox (`WDAGUtilityAccount`) with networking, clipboard and vGPU disabled. Inputs were mapped read-only and evidence output was mapped read/write.
+- The initial install and upgrade checks used Windows Sandbox (`WDAGUtilityAccount`) with networking, clipboard and vGPU disabled. The subsequent online bootstrap checks enabled networking in separate disposable guests. Inputs were mapped read-only and each guest had a dedicated evidence folder.
 - Host coverage used only dedicated install, backend-profile and WebView2-profile directories under `.tmp/host-installer-acceptance`.
 - The existing default host profile under `%LOCALAPPDATA%\app.deepresearch.studio.gen1` was read only to compute file-count, byte-count and content-hash tree identity; its files were not parsed, copied or modified. The identity stayed at 213 files, 14,328,144 bytes and SHA-256 `239e680c191a8ab733dd9a376e6914d39fa87dc50bed791a521423f12dff9414` through alpha.1, alpha.2 and alpha.3 host upgrades.
 - Provider credentials and credential-bearing profile files were not read, copied or recorded by installer acceptance.
@@ -68,4 +68,17 @@ Evidence: `.tmp/host-installer-acceptance/state.json`.
 
 ## Final result
 
-**PASS.** Clean install, real Alpha.1 → Alpha.3 upgrade, host Alpha.2 → Alpha.3 upgrade, stale WebView2 registration recovery, profile persistence, duplicate-instance safety, real-Provider operation, export, normal close and silent uninstall were all exercised. No installer-acceptance failure remains open.
+Clean install with an existing runtime, upgrades, stale-registration recovery, profile persistence, duplicate-instance safety, real-provider operation, export, normal close and uninstall passed. The first-use online checks below have separate outcomes.
+
+## Online WebView2 bootstrap
+
+Both runs used the Alpha.3 installer identified above, with networking enabled and no runtime-folder override. We isolated only the WebView2 product registrations inside disposable guests. Before each run the applicable version keys were empty and the default Microsoft Loader returned `0x80070002`. Windows Sandbox retained the protected `157.0.4341.46` system files. A machine image with no preinstalled runtime files remains untested.
+
+| Windows session | Result |
+| --- | --- |
+| Fresh standard account | **Passed.** The account initially had no WebView2 directory. NSIS downloaded and ran the Microsoft-signed bootstrapper and exited 0 after 91.37 seconds. A new `157.0.4341.60` runtime registered under HKCU. The native browser process ran from that account's new runtime directory. The Tauri main page and local thread-backed API were ready after 8.577 seconds. The client closed normally. Uninstall exited 0, removed the application and its registration, released the listeners, and retained the test database and shared runtime. |
+| Elevated account | **Failed.** NSIS downloaded and ran the same signed bootstrapper. The Microsoft Edge Update log recorded `0x80040902`. NSIS exited 2 after 148.09 seconds. No client executable or new runtime registration appeared. |
+
+The Microsoft bootstrapper was 1,897,688 bytes with a valid Authenticode signature from Microsoft Corporation. This signature applies to the runtime bootstrapper. Deep Research Studio Alpha.3 is unsigned. Microsoft documents how the installation context selects per-user or per-machine deployment. [Microsoft WebView2 distribution](https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/distribution)
+
+The checked installer identity, runtime versions, loaded browser path and uninstall outcomes are available in the [machine-readable results](windows-webview2-bootstrap-20261118.json).
