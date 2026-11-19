@@ -17,7 +17,7 @@
 [![BYOK](https://img.shields.io/badge/模型-自带密钥-7c3aed.svg)](#隐私与安全)
 [![Demo](https://img.shields.io/badge/Demo-界面预览-f59e0b.svg)](https://moonaria123.github.io/Deep-Research-Studio/)
 
-[打开界面预览 Demo](https://moonaria123.github.io/Deep-Research-Studio/) · [本地安装](docs/deployment.md) · [安全说明](SECURITY.md)
+[打开界面预览 Demo](https://moonaria123.github.io/Deep-Research-Studio/) · [本地安装](#安装) · [Windows x64 Alpha](https://github.com/Moonaria123/Deep-Research-Studio/releases/tag/v1.1.0-alpha.3) · [安全说明](SECURITY.md)
 
 </div>
 
@@ -123,7 +123,15 @@ Deep Research Studio 把研究流程集中在一个本地 Web 应用中。你可
 
 ## 安装
 
-Deep Research Studio 提供两种本地 Web 部署方式：
+### Windows 桌面客户端 Alpha
+
+[下载 Windows x64 安装包](https://github.com/Moonaria123/Deep-Research-Studio/releases/download/v1.1.0-alpha.3/Deep-Research-Studio_1.1.0-alpha.3_windows-x64-setup.exe) · [发布说明与哈希校验](https://github.com/Moonaria123/Deep-Research-Studio/releases/tag/v1.1.0-alpha.3)
+
+此未签名测试版已在 Windows 11 x64 验证。用日常账户运行安装程序，再从开始菜单打开 **Deep Research Studio**。客户端随包提供本地研究服务，界面使用 Microsoft WebView2。安装程序需要下载 WebView2 时，请保持联网。
+
+首次启动时，Provider 配置和研究资料库均为空。在 **Settings** 中填写自己的模型和搜索服务密钥即可开始研究。[Windows 客户端指南](docs/windows-client.md)
+
+### Docker 本地 Web 版
 
 | 主机 | 前置条件 | 根密钥保护 |
 | --- | --- | --- |
@@ -189,9 +197,6 @@ Web 客户端连接本地 API。Redis 协调研究和语义 Worker；报告、�
 疑似漏洞请按 [SECURITY.md](SECURITY.md) 中的流程报告。
 
 ## 路线图
-
-Windows 客户端在 Web 发布基线后的独立分支开发。构建方式与验收边界见
-[Windows 客户端开发说明](docs/windows-client.md)。
 
 ### 第一代维护
 

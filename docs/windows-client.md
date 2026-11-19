@@ -1,9 +1,7 @@
-# Windows desktop client (Gen1 development)
+# Windows desktop client
 
-This branch adds a Windows x64 client to the published Gen1 Web application. Its
-parent is public Web commit `cace08540495604605623aae843b9a21525df6bd`.
-The desktop package is `1.1.0-alpha.3`, a local development build. It does not
-replace the published Web `v1.0.0` release.
+The Gen1 Windows x64 client packages the research engine and native desktop
+interface. Version `1.1.0-alpha.3` is the Windows Alpha prerelease. [GitHub release](https://github.com/Moonaria123/Deep-Research-Studio/releases/tag/v1.1.0-alpha.3)
 
 See the [Windows acceptance record](windows-client-acceptance-20261118.md) for
 the installer identity and results. The [Alpha 1 validation record](windows-client-validation-20261118.md)
@@ -11,7 +9,7 @@ documents the preceding build.
 
 ## Install and use
 
-Double-click `Deep Research Studio_1.1.0-alpha.3_x64-setup.exe` from the Windows
+Double-click `Deep-Research-Studio_1.1.0-alpha.3_windows-x64-setup.exe` from the Windows
 account that will use the app. A standard account can complete the installation.
 When WebView2 has no registered version, keep the computer online so the installer
 can download Microsoft's bootstrapper. In our standard-user test, it installed a
@@ -23,7 +21,7 @@ The client includes its local API and requires WebView2. Python, Docker and Redi
 are unnecessary on the destination machine.
 If the registered version is unavailable, the client looks for a machine-installed
 Evergreen runtime and checks the Microsoft signatures on its browser and loader
-before using it. This development installer is unsigned.
+before using it. The Alpha installer is unsigned.
 
 Open **Deep Research Studio** from the Start menu. The startup window stays
 visible until the bundled API is listening. Configure your own model and search
@@ -114,10 +112,10 @@ the failed attempts and the citation coverage displayed for each real report.
 安装程序会下载微软引导程序。普通账户已经实测可以完成安装；若从提升权限的会话启动时
 遇到 WebView2 安装错误，请返回普通桌面重新打开安装包。
 
-本分支在已公开的第一代 Web 基线上新增 Windows x64 客户端，采用 Tauri 2 与随安装包
+第一代 Windows x64 客户端采用 Tauri 2 与随安装包
 携带的本地 API。终端用户无需安装 Python、Docker 或 Redis。界面仍为英文，首次启动后
 在 Settings 配置自己的 Provider。
 
 客户端使用独立数据目录和 DPAPI 凭据库，不自动迁移 Web / 第二代数据。关闭窗口会停止
-研究进程，已保存的数据保留。当前安装包是未签名的本地开发版本。各版本的安装与升级、
+研究进程，已保存的数据保留。当前安装包是未签名的 Alpha 预发布版本。各版本的安装与升级、
 桌面界面和真实研究结果见[验收记录](windows-client-acceptance-20261118.md)。
