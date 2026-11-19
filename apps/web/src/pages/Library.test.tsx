@@ -272,8 +272,47 @@ describe("Library", () => {
     fireEvent.click(await screen.findByText("Doc A"));
 
     expect(await screen.findByText(/snapshot preview/i)).toBeTruthy();
+    expect(screen.getByRole("link", { name: /Open latest web page/i })).toHaveAttribute("target", "_blank");
     expect(api.listSourceSessions).toHaveBeenCalledWith("d1");
     expect(api.getLibrarySnapshot).toHaveBeenCalledWith("snap1");
+  });
+
+  it("does not count provenance without a session or run as a linked run", async () => {
+    vi.mocked(api.listLibraryDocuments).mockResolvedValue({
+      documents: [
+        {
+          id: "local-doc",
+          url: null,
+          title: "Imported document",
+          filename: "document.xlsx",
+          content_type: "xlsx",
+          created_at: 1,
+          chunks: 1,
+          origin: "local",
+          artifact_type: "library_document",
+        },
+      ],
+    });
+    vi.mocked(api.listSourceSessions).mockResolvedValue({
+      artifacts: [
+        {
+          id: "prov-local",
+          artifact_type: "library_document",
+          artifact_id: "local-doc",
+          document_id: "local-doc",
+          session_id: null,
+          run_id: null,
+          created_at: 1,
+          metadata: { source: "local_import" },
+        },
+      ],
+    });
+
+    renderLibrary();
+    fireEvent.click(await screen.findByText("Imported document"));
+
+    expect(await screen.findByText("Research links: 0")).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: /null/i })).not.toBeInTheDocument();
   });
 
   it("shows reports tab and previews a selected report", async () => {

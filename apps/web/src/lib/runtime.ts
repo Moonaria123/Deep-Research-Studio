@@ -1,4 +1,11 @@
 export const IS_DEMO = import.meta.env.MODE === "demo";
+export const IS_DESKTOP = import.meta.env.MODE === "desktop";
+export const EXTERNAL_LINK_TARGET = IS_DESKTOP ? "system-browser" : "_blank";
+
+/** Desktop and static Demo builds use hash routes so deep links stay within one asset. */
+export function usesHashRouting(mode: string): boolean {
+  return mode === "demo" || mode === "desktop";
+}
 
 class MemoryStorage implements Storage {
   private values = new Map<string, string>();

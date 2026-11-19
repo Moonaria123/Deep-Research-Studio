@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-18",
+  "source_commit": "0dca4a2b2b25e915c7d6cc4ef684fcbe87760be8",
+  "platform": "Windows Sandbox x64, build 26100",
+  "installer": {
+    "name": "Deep Research Studio_1.1.0-alpha.3_x64-setup.exe",
+    "sha256": "57db92560c21d96a87d7c2f7cabb183248d37f0a7faac0d98d7bd4c94cb9abff",
+    "bytes": 33096242
+  },
+  "microsoft_download": {
+    "sha256": "cf2f2445fef0c5c14e372045f84998771eeb8bb01d59be4afd00692fa160082e",
+    "bytes": 1897688,
+    "authenticode_status": "Valid",
+    "publisher": "Microsoft Corporation"
+  },
+  "cases": {
+    "standard_user": {
+      "administrator": false,
+      "registry_versions_before": [],
+      "default_loader_hresult_before": "80070002",
+      "system_runtime_files_before": [
+        "157.0.4341.46"
+      ],
+      "nsis_exit": 0,
+      "install_seconds": 91.37,
+      "app_installed": true,
+      "outcome": "passed",
+      "per_user_runtime_before": false,
+      "registered_hive_after": "HKCU",
+      "loaded_runtime": "%LOCALAPPDATA%\\Microsoft\\EdgeWebView\\Application\\157.0.4341.60\\msedgewebview2.exe",
+      "native_url": "http://tauri.localhost/",
+      "api_status": "ok",
+      "job_backend": "thread",
+      "ready_seconds": 8.577,
+      "uninstaller_exit": 0,
+      "normal_close": true,
+      "app_removed": true,
+      "registration_removed": true,
+      "retained_database": true,
+      "retained_runtime": "157.0.4341.60",
+      "listeners_after_close": 0
+    },
+    "elevated_user": {
+      "administrator": true,
+      "registry_versions_before": [],
+      "default_loader_hresult_before": "80070002",
+      "system_runtime_files_before": [
+        "157.0.4341.46"
+      ],
+      "nsis_exit": 2,
+      "install_seconds": 148.09,
+      "app_installed": false,
+      "outcome": "failed",
+      "edge_update_log_hresult": "0x80040902",
+      "registry_versions_after": []
+    }
+  },
+  "machine_with_no_preinstalled_runtime_files": "not_tested"
+}

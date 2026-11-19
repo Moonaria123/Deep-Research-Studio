@@ -17,7 +17,7 @@
 [![BYOK](https://img.shields.io/badge/Models-BYOK-7c3aed.svg)](#privacy-and-security)
 [![Demo](https://img.shields.io/badge/Demo-interface%20preview-f59e0b.svg)](https://moonaria123.github.io/Deep-Research-Studio/)
 
-[Open the interface-only Demo](https://moonaria123.github.io/Deep-Research-Studio/) · [Install locally](docs/deployment.md) · [Security](SECURITY.md)
+[Open the interface-only Demo](https://moonaria123.github.io/Deep-Research-Studio/) · [Install locally](#install) · [Windows x64 Alpha](https://github.com/Moonaria123/Deep-Research-Studio/releases/tag/v1.1.0-alpha.3) · [Security](SECURITY.md)
 
 </div>
 
@@ -123,7 +123,15 @@ Pin, archive, restore, and continue research sessions.
 
 ## Install
 
-Deep Research Studio supports two local Web deployment paths:
+### Windows desktop Alpha
+
+[Download the Windows x64 installer](https://github.com/Moonaria123/Deep-Research-Studio/releases/download/v1.1.0-alpha.3/Deep-Research-Studio_1.1.0-alpha.3_windows-x64-setup.exe) · [Release notes and checksums](https://github.com/Moonaria123/Deep-Research-Studio/releases/tag/v1.1.0-alpha.3)
+
+This unsigned Alpha was tested on Windows 11 x64. Run the installer from your usual Windows account and launch **Deep Research Studio** from the Start menu. The app includes its local research service and uses Microsoft WebView2. Keep the computer online if setup needs to download WebView2.
+
+The first launch starts with an empty provider configuration and research library. Add your own model and search provider keys in **Settings**. [Windows client guide](docs/windows-client.md)
+
+### Local Web with Docker
 
 | Host | Requirements | Key protection |
 | --- | --- | --- |

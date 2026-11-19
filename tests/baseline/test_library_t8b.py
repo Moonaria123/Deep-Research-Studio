@@ -157,8 +157,15 @@ def test_library_source_sessions_and_snapshots_api(tmp_path):
     )
     snap_id = service.capture_document_snapshot(document_id=doc_id, run_id="r1")["snapshot_id"]
 
+    # Standalone imports have provenance even before a research session uses them.
+    service.store.add_library_provenance(
+        artifact_type="library_document", artifact_id=doc_id, document_id=doc_id,
+        metadata={"source": "local_import"},
+    )
+
     sessions = client.get(f"/api/v1/library/sources/{doc_id}/sessions").json()
     assert sessions["artifacts"][0]["session_id"] == "s1"
+    assert all(row["session_id"] or row["run_id"] for row in sessions["artifacts"])
     snapshots = client.get(f"/api/v1/library/sources/{doc_id}/snapshots").json()
     assert snapshots["snapshots"][0]["id"] == snap_id
     preview = client.get(f"/api/v1/library/snapshots/{snap_id}").json()

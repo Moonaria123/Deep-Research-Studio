@@ -3,10 +3,10 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, HashRouter } from "react-router-dom";
 import App from "./App";
 import "./index.css";
-import { installDemoRuntime, IS_DEMO } from "./lib/runtime";
+import { installDemoRuntime, usesHashRouting } from "./lib/runtime";
 
 installDemoRuntime();
-const Router = IS_DEMO ? HashRouter : BrowserRouter;
+const Router = usesHashRouting(import.meta.env.MODE) ? HashRouter : BrowserRouter;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

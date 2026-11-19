@@ -8,6 +8,7 @@ import {
 } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { EXTERNAL_LINK_TARGET } from "@/lib/runtime";
 import type { Citation } from "@/lib/types";
 import { buildClaimLookup, resolveClaimForSentence, sentenceRanges } from "@/lib/claimMap";
 
@@ -182,7 +183,7 @@ export function AnswerBody({
               );
             }
             return (
-              <a href={href} title={title} target="_blank" rel="noreferrer" className="text-accent underline focus-ring">
+              <a href={href} title={title} target={EXTERNAL_LINK_TARGET} rel="noreferrer noopener" className="text-accent underline focus-ring">
                 {children}
               </a>
             );

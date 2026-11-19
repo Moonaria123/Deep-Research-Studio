@@ -11,9 +11,11 @@ const licenceFiles = ["LICENSE", "NOTICE", "THIRD_PARTY_NOTICES.md"].map((fileNa
 const attributionBanner = `/*!\n${licenceFiles[1].source.trim()}\nLicence: https://polyformproject.org/licenses/noncommercial/1.0.0\n*/`;
 
 export default defineConfig(({ mode }) => ({
-  base: mode === "demo" ? "/Deep-Research-Studio/" : "/",
+  base: mode === "demo" ? "/Deep-Research-Studio/" : mode === "desktop" ? "./" : "/",
   define: {
-    "import.meta.env.VITE_DEEPRESEARCH_API_ORIGIN": JSON.stringify(""),
+    "import.meta.env.VITE_DEEPRESEARCH_API_ORIGIN": JSON.stringify(
+      mode === "desktop" ? "http://127.0.0.1:18789" : "",
+    ),
   },
   plugins: [
     react(),

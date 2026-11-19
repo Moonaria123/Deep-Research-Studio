@@ -187,7 +187,12 @@ def create_app(
             if (
                 not valid_host
                 or (origin is not None and origin not in web_origins)
-                or request.headers.get("sec-fetch-site") == "cross-site"
+                # The desktop WebView is intentionally cross-site to loopback.
+                # Only an explicitly configured, exact CORS origin may use it.
+                or (
+                    request.headers.get("sec-fetch-site") == "cross-site"
+                    and origin not in allowed_cors_origins
+                )
             ):
                 return JSONResponse(status_code=403, content=error_payload(
                     ErrorCode.UNAUTHORIZED, "This local service does not accept this request origin.",

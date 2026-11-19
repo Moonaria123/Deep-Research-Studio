@@ -40,6 +40,11 @@ describe("SourcesRail", () => {
     expect(getByText(/No sources for this run/)).toBeInTheDocument();
   });
 
+  it("uses the runtime external-link target for web sources", () => {
+    render(<SourcesRail sources={[src("external")]} />);
+    expect(screen.getByRole("link", { name: /Source external/ })).toHaveAttribute("target", "_blank");
+  });
+
   it("renders local and archived-memory provenance with internal deep links", () => {
     const internal: EvidenceSource[] = [
       {

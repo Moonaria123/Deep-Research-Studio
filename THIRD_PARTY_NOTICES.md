@@ -27,6 +27,23 @@ The table below lists direct runtime dependencies in this release. Transitive de
 | RQ | BSD-2-Clause |
 | pysqlcipher3 | BSD-3-Clause |
 
+## Windows desktop development package
+
+The Gen1 Windows package adds the components below. The Rust dependency
+inventory is locked in `apps/desktop/src-tauri/Cargo.lock`; the isolated Python
+runtime and build inventories are in `apps/desktop/requirements-sidecar.txt` and
+`apps/desktop/requirements-build.txt`. Windows uses the API dependencies above
+without Redis, RQ or pysqlcipher3. These desktop components are not additions to
+the published Web v1.0.0 artifacts.
+
+| Component | Licence |
+| --- | --- |
+| Tauri, tauri-plugin-shell, serde_json, windows-sys | MIT OR Apache-2.0 |
+| Bundled CPython runtime | Python Software Foundation licence and included component notices |
+| PyInstaller bootloader and packaging runtime | GPL-2.0-or-later with the PyInstaller distribution exception; see its `COPYING.txt` |
+| PyInstaller community runtime hooks | Apache-2.0; build-time hooks use GPL-2.0-or-later |
+| Microsoft Edge WebView2 | Microsoft terms; installed separately by the Windows bootstrapper when required |
+
 ## Container base images
 
 The deployment builds from the Python, Node.js, nginx, and Redis images named in the Dockerfiles and Compose file. Those images include operating-system and language packages under multiple licences. Review their image documentation and included notice files before redistribution.

@@ -145,6 +145,24 @@ def test_probe_http_matrix(code: int, body: dict | None, probe_state: str, crede
         assert 1 <= result["retry_after"] - time.time() <= 3601
 
 
+@pytest.mark.parametrize(
+    ("body", "expected"),
+    [
+        ({"success": True, "data": {"web": []}}, "available"),
+        ({"success": True, "data": []}, "available"),
+        ({"success": True, "data": {"news": []}}, "service_unavailable"),
+        ({"success": False, "data": {"web": []}}, "service_unavailable"),
+    ],
+)
+def test_firecrawl_web_search_probe(body: dict, expected: str) -> None:
+    result = check_named_search_provider_connectivity(
+        ProviderSettings(firecrawl_api_key="candidate"),
+        provider_id="firecrawl",
+        opener=lambda request, timeout: _Response(body),
+    )
+    assert result["probe_state"] == expected
+
+
 def test_invalid_2xx_is_soft_failure() -> None:
     result = check_named_search_provider_connectivity(
         ProviderSettings(tavily_api_key="candidate"),
